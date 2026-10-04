@@ -21,7 +21,7 @@ export const config = {
   name: "CULL",
   tagline: "Keyboard-fast culling for RAW photos",
   downloads: "https://github.com/oliver-sogaard/cull-releases/releases/latest",
-  version: "2.4.1",
+  version: "2.5.1",
   /** Empty until the owner sets them (same values as src/product.ts). */
   supportEmail: "support@cull.photography",
   reportUrl: "",

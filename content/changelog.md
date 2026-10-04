@@ -1,5 +1,27 @@
 # What's new
 
+## 2.5.1 · 2026-10-04
+
+- A licensed copy says so: a small Pro badge sits beside CULL in the top left.
+- Settings → License: the computers list has its rows from the moment the tab opens, and fills them in when the list arrives, instead of appearing all at once.
+- Removing a license says its two sentences on a line each, so nothing moves when Remove? and Cancel appear.
+- The letters in the footer's overlay circles sit in the middle of them.
+- The footer has no divider after the filters while nothing follows them.
+- The third-party notices no longer scroll sideways: a long address wraps.
+- Email support says in one line that screenshots have to be attached by hand.
+- The privacy policy says how long a license is kept as the license service now does it: 90 days for one that was never paid for, five years past the end of the year of its last purchase otherwise.
+
+## 2.5.0 · 2026-10-03
+
+- Email support from the Feedback tab carries both things you wrote, and says so when screenshots could not travel with it: a mail link cannot attach files.
+- A half-written Feedback report now survives closing Settings, screenshots included, until it is sent or CULL closes.
+- Feedback screenshots and their Remove buttons are the same width.
+- Settings → License: Licensed to and Remove license from this computer each fit on one line.
+- A withdrawn license says so more plainly. On the staged screen the line stands on its own, under the Free cap, and the Get CULL Pro card is back on the home screen while it shows.
+- When the license terms or the privacy policy change, CULL says so once at the next launch, with both texts a click away. Continuing accepts them, as the welcome does.
+- The key email says where to paste the key in plain words, with no keyboard shortcut.
+- Updates and the download links follow CULL's new GitHub address.
+
 ## 2.4.1 · 2026-10-03
 
 - The website is cull.photography, and support is support@cull.photography. The app, the key emails and the site all point there now.
