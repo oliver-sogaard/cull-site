@@ -22,7 +22,7 @@ If CULL Pro does not work for you, write within 14 days of the purchase and the 
 
 ## Cancelling a subscription
 
-A monthly or yearly subscription can be cancelled at any time: from inside CULL (Settings → License → Manage subscription), from the link in Paddle's receipt email, or by writing to support; Pro continues to the end of the paid period and nothing more is charged. A lifetime license is a single payment and never renews.
+A monthly or yearly subscription renews automatically at the end of each month or year, at the price you agreed to, until it is cancelled. It can be cancelled at any time: from inside CULL (Settings → License → Manage subscription), from the link in Paddle's receipt email, or by writing to support; Pro continues to the end of the paid period and nothing more is charged. A lifetime license is a single payment and never renews.
 
 ## Prices and changes
 
