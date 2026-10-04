@@ -44,8 +44,8 @@ export const config = {
       yearly: "pri_01m44bxtqtq5rkce9hncd0q35x",
       lifetime: "pri_01m44bz2q9s6xw3rc5x17eyk43",
     },
-    /** Empty until the widget exists: the lost-key page then says "write to support". */
-    turnstileSiteKey: "",
+    /** Cloudflare Turnstile (widget cull-lost-key). Empty: the lost-key page says "write to support". */
+    turnstileSiteKey: "0x4AAAAAAFNzi3zLR0LghzKn",
   },
 };
 
