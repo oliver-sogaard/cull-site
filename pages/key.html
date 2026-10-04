@@ -1,0 +1,17 @@
+      <article class="prose" {{storeAttrs}}>
+        <section data-state="form">
+          <div class="eyebrow">Lost your key?</div>
+          <h1 class="buy__title">We'll send it again.</h1>
+          {{lostForm}}
+        </section>
+
+        <section data-state="answer" hidden>
+          <div class="eyebrow">Lost your key?</div>
+          <h1 class="buy__title">Check your email.</h1>
+          <div class="answer" role="status">
+            <strong>If that address has a license, the key is on its way.</strong>
+            It comes from hello@cull.photography. Nothing after a few minutes? Try the address
+            you paid with, or write to {{supportEmail}}.
+          </div>
+        </section>
+      </article>

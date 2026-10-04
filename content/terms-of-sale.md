@@ -1,8 +1,8 @@
 # Terms of sale
 
-Draft · not yet in force
+Version 1 · October 2026
 
-These terms will apply to buying CULL Pro from the first day it is sold. Until then nothing is sold and nothing here applies. A lawyer reviews them before the first sale.
+These terms apply to every purchase of CULL Pro.
 
 ## Who sells
 
@@ -10,7 +10,7 @@ CULL Pro is sold through Paddle.com Market Ltd ("Paddle"), the merchant of recor
 
 ## What you buy
 
-A license to use CULL Pro on two computers at a time, as described in the license terms. The license is delivered as a key by email straight after payment. Prices are shown before you pay; VAT is added where Paddle is required to charge it.
+A license to use CULL Pro on two computers at a time, as described in the license terms. The license is delivered as a key, shown on the page straight after payment and sent by email. Prices are shown before you pay; VAT is added where Paddle is required to charge it.
 
 ## Trying before buying
 
@@ -22,7 +22,7 @@ If CULL Pro does not work for you, write within 14 days of the purchase and the 
 
 ## Cancelling a subscription
 
-A monthly or yearly subscription can be cancelled at any time, from the link in Paddle's receipt email or by writing to support; Pro continues to the end of the paid period and nothing more is charged. A lifetime license is a single payment and never renews.
+A monthly or yearly subscription can be cancelled at any time: from inside CULL (Settings → License → Manage subscription), from the link in Paddle's receipt email, or by writing to support; Pro continues to the end of the paid period and nothing more is charged. A lifetime license is a single payment and never renews.
 
 ## Prices and changes
 

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./assets/pages.css" />
   </head>
   <body>
+    <div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>
     <header class="nav">
       <div class="wrap nav__row">
         <a class="nav__brand" href="./">CULL</a>
@@ -19,38 +20,64 @@
           <a href="./formats.html">Formats</a>
           <a href="./changelog.html">Changelog</a>
           <a href="./support.html">Support</a>
+          <a href="./pro.html" class="is-cta" aria-current="page">Pro</a>
         </nav>
       </div>
     </header>
     <main class="wrap page">
-      <article class="prose">
-        <h1>CULL Pro</h1>
+      <article class="prose prose--wide" data-store="pro" data-env="sandbox" data-api="https://api.cull.photography" data-token="test_5333af6d0cf1e18adcc770b273b" data-monthly="pri_01m44bw9kvenpc3gpqxspy91w4" data-yearly="pri_01m44bxtqtq5rkce9hncd0q35x" data-lifetime="pri_01m44bz2q9s6xw3rc5x17eyk43">
+        <div class="eyebrow">CULL Pro</div>
+        <h1 class="buy__title">Cull shoots of <em>any size.</em></h1>
         <p class="hero__lead">
-          CULL Free has every feature and culls up to 250 frames in one session. Pro culls
-          shoots of any size. One key, sent by email, for two computers.
+          CULL Free has every feature and culls up to 250 frames in one session. Pro takes the
+          limit away. One key, for two computers.
         </p>
-        <h2>Prices</h2>
-        <dl class="formats-list">
-          <dt>Monthly</dt><dd>7.99 USD a month. Cancel any time; Pro runs to the end of the paid month.</dd>
-          <dt>Yearly</dt><dd>49.99 USD a year.</dd>
-          <dt>Lifetime</dt><dd>129.99 USD, once. Every update, for as long as CULL exists.</dd>
-        </dl>
-        <p>
-          Prices are in US dollars. VAT is added at checkout where it applies. Checkout,
-          receipts and refunds are handled by Paddle, the merchant of record.
+
+        <div class="buy">
+          <section class="buy__once" aria-labelledby="buy-lifetime">
+            <div class="eyebrow">Pay once</div>
+            <div class="buy__price buy__price--big" aria-hidden="true">129.99</div>
+            <p>
+              <strong id="buy-lifetime">Lifetime.</strong> <span class="buy__sr">129.99 US dollars, once.</span>
+              Every update, for as long as CULL exists. No renewal, nothing to cancel.
+            </p>
+            <button class="btn btn--primary" type="button" data-buy="lifetime">Buy Lifetime</button>
+          </section>
+          <section class="buy__go" aria-label="Subscriptions">
+            <div class="eyebrow buy__go-head">Or pay as you go</div>
+            <div class="buy__row">
+              <div class="buy__name">Yearly</div>
+              <div class="buy__amount"><span class="buy__price">49.99</span><span class="buy__per">a year</span></div>
+              <p>45.89 less than twelve months of Monthly.</p>
+              <button class="btn btn--sm" type="button" data-buy="yearly">Buy Yearly</button>
+            </div>
+            <div class="buy__row">
+              <div class="buy__name">Monthly</div>
+              <div class="buy__amount"><span class="buy__price">7.99</span><span class="buy__per">a month</span></div>
+              <p>Cancel any time. Pro runs to the end of the paid month.</p>
+              <button class="btn btn--sm" type="button" data-buy="monthly">Buy Monthly</button>
+            </div>
+          </section>
+        </div>
+        <p class="buy__trouble" id="buy-trouble" role="alert" hidden>
+          The checkout could not be loaded. If a content blocker is on for this page, turn it
+          off and reload, or write to support and we will sort it out.
         </p>
-        <h2>Not on sale yet</h2>
-        <p>
-          Sales open soon. Until then there is nothing to buy here, and CULL Free is the whole
-          app up to 250 frames a session, with no time limit.
+        <p class="buy__fine">
+          Prices in US dollars; VAT is added at checkout where it applies. Checkout, receipts
+          and refunds are handled by Paddle, the merchant of record.
+          <a href="./terms-of-sale.html#refunds">A full refund within 14 days</a>, no reason
+          needed. <a href="./terms-of-sale.html">Terms of sale</a>.
         </p>
+        
+
         <h2>How a license works</h2>
         <ul>
-          <li>The key arrives by email after payment. In CULL, open Settings → License, paste it and press Add license.</li>
+          <li>The key is shown on the page right after payment, and sent by email. In CULL, open Settings → License, paste it and press Add license.</li>
           <li>A key works on two computers at a time. To move it, remove it on one computer (Settings → License) and enter it on the other.</li>
           <li>CULL confirms the license online about every twelve hours and keeps working offline for 30 days.</li>
-          <li>Lost the key? Write to support from the email address you bought with.</li>
-          <li>Changed your mind? Write within 14 days of the purchase and the price is refunded in full.</li>
+          <li>A subscription is managed from inside CULL: Settings → License → Manage subscription.</li>
+          <li>Lost the key? <a href="./key.html">Have it sent again.</a></li>
         </ul>
         <p>Support: <a href="mailto:support@cull.photography">support@cull.photography</a>.</p>
       </article>
@@ -59,10 +86,12 @@
     <footer class="footer">
       <div class="wrap footer__row">
         <div>
-          <a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./press.html">Press kit</a>
+          <a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
         </div>
         <div>© 2026 Oliver Søgaard-Andersen</div>
       </div>
     </footer>
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+    <script src="./assets/store.js?v=465a3c3953" defer></script>
   </body>
 </html>

@@ -19,5 +19,24 @@ node serve.mjs          # look at docs/ on http://127.0.0.1:8188/
 - `build.mjs` `config` — version shown on the download buttons, the
   downloads address, the support email (empty until one exists).
 
+## The store
+
+`pro.html` (the prices and their buy buttons), `thanks.html` (shows the key
+after payment) and `key.html` (has a lost key sent again) are the store.
+`assets/store.js` runs all three; each page carries its settings as data
+attributes, so nothing is inline. `build.mjs` `config.store` holds what they
+need, all of it public: `env` (`off`, `sandbox` or `live`), the license
+service address, Paddle client-side token and price ids, and the Turnstile
+site key (empty: the lost-key page says to write to support). While `env`
+is `sandbox` the three pages carry a test-mode strip. Paddle.js loads on
+`pro.html` only, Turnstile on `key.html` only; `thanks.html` runs nothing
+but its own script, under a `<meta>` content security policy.
+
+The thank-you page links the installers by name, so `config.version` must
+be the released version: `--sync` after every release.
+
+Going live: the license service first (see its README), then `env: "live"`
+with the live token and price ids here.
+
 Downloads point at the public `cull-releases` repository. The app's source
 is private.

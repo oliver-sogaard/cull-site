@@ -160,3 +160,324 @@
     white-space: normal;
   }
 }
+
+/* ── the store: the Pro page's prices, the thank-you page, the lost key ── */
+.teststrip {
+  background: var(--accent-a10);
+  border-bottom: 1px solid var(--accent-a25);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 7px 24px;
+}
+
+.prose h1.buy__title {
+  margin: 14px 0 18px;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.buy__title em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* Pay once, large, on the left; the two subscriptions beside it. */
+.buy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: stretch;
+  margin-top: 36px;
+}
+
+.buy__once {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: clamp(24px, 3.5vw, 44px);
+  border: 1px solid var(--accent-a25);
+  border-radius: 10px;
+  background:
+    linear-gradient(160deg, var(--accent-a10), transparent 62%),
+    var(--surface);
+}
+
+.buy__once p,
+.buy__row p {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+.buy__once p {
+  max-width: 26rem;
+  font-size: 1.0625rem;
+}
+
+.buy__once .btn {
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+.buy__price {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.buy__price--big {
+  font-size: clamp(3rem, 2rem + 5vw, 5.5rem);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.buy__per {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Read out with the name; the big figure beside it is for the eye. */
+.buy__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.buy__go {
+  display: flex;
+  flex-direction: column;
+}
+
+.buy__go-head {
+  color: var(--muted);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.buy__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 18px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.buy__row p,
+.buy__row .btn {
+  grid-column: 1 / -1;
+}
+
+.buy__row .btn {
+  justify-self: start;
+  margin-top: 6px;
+}
+
+.buy__name {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.buy__amount {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.prose p.buy__fine {
+  color: var(--muted);
+  font-size: 0.875rem;
+  max-width: 44rem;
+  margin: 28px 0 0;
+}
+
+.prose p.buy__trouble {
+  margin: 16px 0 0;
+  color: var(--bad);
+  font-size: 0.9375rem;
+}
+
+.btn--sm {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 0.875rem;
+}
+
+/* thank-you */
+.wait {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+.wait i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: wait-breathe 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes wait-breathe {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.keybox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  max-width: 46rem;
+  padding: 20px 22px;
+  border: 1px solid var(--accent-a25);
+  border-radius: 8px;
+  background: var(--accent-a10);
+}
+
+.prose .keybox code {
+  flex: 1 1 18rem;
+  min-width: 0;
+  padding: 0;
+  background: none;
+  font-size: clamp(0.9375rem, 0.7rem + 1.3vw, 1.375rem);
+  letter-spacing: 0.06em;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.prose p.keybox__after {
+  margin-top: 16px;
+}
+
+.prose ol.steps {
+  list-style: none;
+  max-width: 46rem;
+  margin: 40px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  counter-reset: step;
+}
+
+.prose .steps li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  align-items: center;
+  margin: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-soft);
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.steps__dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.prose .steps__dl a {
+  text-decoration: none;
+}
+
+/* lost key */
+.lost {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 34rem;
+}
+
+.lost input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-3);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.lost input::placeholder {
+  color: var(--muted);
+}
+
+.lost input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+.lost__check {
+  flex: 1 1 100%;
+  min-height: 65px;
+}
+
+.answer {
+  max-width: 36rem;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--ok);
+  border-radius: var(--r-3);
+  background: var(--surface);
+  color: var(--text-2);
+}
+
+.answer strong {
+  display: block;
+  color: var(--text);
+  font-weight: 500;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wait i {
+    animation: none;
+  }
+}
+
+@media (width < 820px) {
+  .buy {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .prose .steps li {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+
+  .steps__dl {
+    grid-column: 2;
+  }
+}

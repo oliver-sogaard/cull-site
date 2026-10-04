@@ -1,0 +1,55 @@
+      <article class="prose prose--wide" {{storeAttrs}}>
+        <section data-state="pending">
+          <div class="eyebrow">Thank you</div>
+          <h1 class="buy__title">Your key is being made.</h1>
+          <p>
+            Payment went through. The key appears on this page in under a minute, and a copy
+            goes to your email. Keep this page open.
+          </p>
+          <div class="wait" role="status"><i aria-hidden="true"></i>Preparing your key</div>
+        </section>
+
+        <section data-state="ready" hidden>
+          <div class="eyebrow" id="plan">CULL Pro</div>
+          <h1 class="buy__title">Here is <em>your key.</em></h1>
+          <div class="keybox">
+            <code id="key"></code>
+            <button class="btn btn--primary" type="button" id="copy">Copy</button>
+          </div>
+          <p class="keybox__after">
+            We also sent it to <strong id="email"></strong>. Keep that email: it is your copy of
+            the key.
+          </p>
+          <ol class="steps">
+            <li>
+              <span><strong>Get CULL</strong> if you don't have it yet.</span>
+              <span class="steps__dl">
+                <a class="btn btn--sm" href="{{downloadWindows}}">Windows</a>
+                <a class="btn btn--sm" href="{{downloadMac}}">Mac</a>
+              </span>
+            </li>
+            <li><span>Open <strong>Settings → License</strong>.</span></li>
+            <li><span><strong>Paste the key</strong> and press Add license. It works on <span id="seats">two computers</span>.</span></li>
+          </ol>
+        </section>
+
+        <section data-state="sent" hidden>
+          <div class="eyebrow">Thank you</div>
+          <h1 class="buy__title">Your key is in your email.</h1>
+          <p>
+            It went to the address you paid with, from hello@cull.photography. If it is not
+            there, look in spam first.
+          </p>
+          <p>
+            Still nothing after an hour? <a href="./key.html">Have the key sent again</a>, or
+            write to {{supportEmail}} with your receipt from Paddle.
+          </p>
+        </section>
+
+        <noscript>
+          <p>
+            This page needs JavaScript to show your key. The key is also on its way to the
+            address you paid with, from hello@cull.photography.
+          </p>
+        </noscript>
+      </article>

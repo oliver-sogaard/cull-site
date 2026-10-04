@@ -9,6 +9,7 @@
  * `node build.mjs --sync`  first copy CHANGELOG.md and legal/*.md from the
  *                          app checkout beside this folder, then build
  */
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,6 +28,25 @@ export const config = {
   reportUrl: "",
   owner: "Oliver Søgaard-Andersen",
   year: "2026",
+  /**
+   * The store. `env`: "off" (prices shown, nothing to buy), "sandbox"
+   * (Paddle's test checkout, a strip says so) or "live". Everything here is
+   * public by design: the client-side token and the price ids are sent to
+   * every visitor's browser, and so is the Turnstile site key. The secrets
+   * live in the license service (the cull-api Worker), never here.
+   */
+  store: {
+    env: "sandbox",
+    apiUrl: "https://api.cull.photography",
+    clientToken: "test_5333af6d0cf1e18adcc770b273b",
+    prices: {
+      monthly: "pri_01m44bw9kvenpc3gpqxspy91w4",
+      yearly: "pri_01m44bxtqtq5rkce9hncd0q35x",
+      lifetime: "pri_01m44bz2q9s6xw3rc5x17eyk43",
+    },
+    /** Empty until the widget exists: the lost-key page then says "write to support". */
+    turnstileSiteKey: "",
+  },
 };
 
 const esc = (s) =>
@@ -97,13 +117,26 @@ const nav = (active) =>
     ["formats", "Formats"],
     ["changelog", "Changelog"],
     ["support", "Support"],
+    ["pro", "Pro", "is-cta"],
   ]
-    .map(([slug, label]) =>
-      `<a href="./${slug}.html"${active === slug ? ' aria-current="page"' : ""}>${label}</a>`,
+    .map(([slug, label, cls]) =>
+      `<a href="./${slug}.html"${cls ? ` class="${cls}"` : ""}${active === slug ? ' aria-current="page"' : ""}>${label}</a>`,
     )
     .join("\n          ");
 
-export function layout({ slug, title, description, body, wide = false }) {
+const selling = () => config.store.env === "sandbox" || config.store.env === "live";
+
+/** A short content hash, so a changed script is fetched at once: GitHub
+ *  Pages lets browsers keep a file for ten minutes. */
+const assetHash = (file) =>
+  crypto.createHash("sha256").update(fs.readFileSync(path.join(here, "assets", file))).digest("hex").slice(0, 10);
+
+/**
+ * `head`: extra tags for this page's head. `scripts`: script tags placed
+ * at the end of the body, in order. `store`: one of the store's pages, which
+ * carry the test-mode strip while the checkout is Paddle's sandbox.
+ */
+export function layout({ slug, title, description, body, wide = false, head = "", scripts = [], store = false }) {
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -115,9 +148,9 @@ export function layout({ slug, title, description, body, wide = false }) {
     <meta name="robots" content="noindex" />
     <link rel="icon" href="./assets/icon-64.png" />
     <link rel="stylesheet" href="./assets/site.css" />
-    <link rel="stylesheet" href="./assets/pages.css" />
+    <link rel="stylesheet" href="./assets/pages.css" />${head ? `\n    ${head}` : ""}
   </head>
-  <body>
+  <body>${store && config.store.env === "sandbox" ? `\n    <div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>` : ""}
     <header class="nav">
       <div class="wrap nav__row">
         <a class="nav__brand" href="./">CULL</a>
@@ -132,14 +165,110 @@ ${body}
     <footer class="footer">
       <div class="wrap footer__row">
         <div>
-          <a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./press.html">Press kit</a>
+          <a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
         </div>
         <div>© ${config.year} ${esc(config.owner)}</div>
       </div>
-    </footer>
+    </footer>${scripts.map((s) => `\n    ${s}`).join("")}
   </body>
 </html>
 `;
+}
+
+/** The attributes a store page's script reads its settings from. */
+function storeAttrs(page) {
+  const s = config.store;
+  const attrs = { store: page, env: s.env, api: s.apiUrl };
+  if (page === "pro") Object.assign(attrs, { token: s.clientToken, ...s.prices });
+  return Object.entries(attrs)
+    .map(([k, v]) => `data-${k}="${esc(v)}"`)
+    .join(" ");
+}
+
+const storeScript = () => `<script src="./assets/store.js?v=${assetHash("store.js")}" defer></script>`;
+
+/** A buy button, or nothing while the store is off. */
+const buyButton = (plan, label, primary) =>
+  selling()
+    ? `<button class="btn${primary ? " btn--primary" : " btn--sm"}" type="button" data-buy="${plan}">${label}</button>`
+    : "";
+
+function proPage(read) {
+  const supportBlock = config.supportEmail
+    ? `<p>Support: <a href="mailto:${config.supportEmail}">${config.supportEmail}</a>.</p>`
+    : "";
+  const body = read("pages/pro.html")
+    .replaceAll("{{storeAttrs}}", storeAttrs("pro"))
+    .replaceAll("{{buyLifetime}}", buyButton("lifetime", "Buy Lifetime", true))
+    .replaceAll("{{buyYearly}}", buyButton("yearly", "Buy Yearly", false))
+    .replaceAll("{{buyMonthly}}", buyButton("monthly", "Buy Monthly", false))
+    .replaceAll(
+      "{{storeNote}}",
+      selling()
+        ? ""
+        : `<p class="buy__fine">Sales open soon. Until then there is nothing to buy here, and CULL Free is the whole app up to 250 frames a session, with no time limit.</p>`,
+    )
+    .replaceAll("{{supportEmailBlock}}", supportBlock);
+  return layout({
+    slug: "pro",
+    title: "CULL Pro — prices and how a license works",
+    description: "What CULL Pro costs (monthly, yearly or once for life), and how a license key works on two computers.",
+    body,
+    store: true,
+    // Paddle.js is the one outside script on the site, and only here.
+    scripts: selling() ? [`<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>`, storeScript()] : [],
+  });
+}
+
+function thanksPage(read) {
+  const base = `https://github.com/oliver-sogaard/cull-releases/releases/latest/download`;
+  const body = read("pages/thanks.html")
+    .replaceAll("{{storeAttrs}}", storeAttrs("thanks"))
+    .replaceAll("{{downloadWindows}}", `${base}/CULL_${config.version}_x64-setup.exe`)
+    .replaceAll("{{downloadMac}}", `${base}/CULL_${config.version}_aarch64.dmg`)
+    .replaceAll("{{supportEmail}}", esc(config.supportEmail));
+  return layout({
+    slug: "thanks",
+    title: "Your CULL Pro key",
+    description: "The page that shows your CULL Pro key after payment.",
+    body,
+    store: true,
+    // The address carries the id that unlocks the key: it is sent to no
+    // other site, and the page runs nothing but its own script. GitHub Pages
+    // sets no headers, so both rules are meta tags.
+    head: [
+      `<meta name="referrer" content="no-referrer" />`,
+      `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src ${config.store.apiUrl}; base-uri 'none'; form-action 'none'" />`,
+    ].join("\n    "),
+    scripts: [storeScript()],
+  });
+}
+
+function keyPage(read) {
+  const s = config.store;
+  const form = s.turnstileSiteKey
+    ? `<p>Enter the email address you bought CULL Pro with.</p>
+          <form class="lost" id="lost-form" novalidate>
+            <input id="lost-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address" required />
+            <button class="btn btn--primary" type="submit" id="lost-send">Send my key</button>
+            <div class="cf-turnstile lost__check" data-sitekey="${esc(s.turnstileSiteKey)}" data-theme="dark"></div>
+            <p class="buy__trouble" id="lost-problem" role="alert" hidden></p>
+          </form>`
+    : `<p>Write to <a href="mailto:${esc(config.supportEmail)}">${esc(config.supportEmail)}</a> from the address you bought CULL Pro with, and the key is sent again.</p>`;
+  const body = read("pages/key.html")
+    .replaceAll("{{storeAttrs}}", storeAttrs("key"))
+    .replaceAll("{{lostForm}}", form)
+    .replaceAll("{{supportEmail}}", esc(config.supportEmail));
+  return layout({
+    slug: "key",
+    title: "Lost your key? — CULL",
+    description: "Have your CULL Pro key sent again to the address you bought it with.",
+    body,
+    store: true,
+    scripts: s.turnstileSiteKey
+      ? [`<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>`, storeScript()]
+      : [],
+  });
 }
 
 function textPage({ slug, title, description, source, lead }) {
@@ -213,17 +342,9 @@ function build() {
         body: read("pages/formats.html"),
       }),
     },
-    {
-      slug: "pro",
-      html: layout({
-        slug: "pro",
-        title: "CULL Pro — prices and how a license works",
-        description: "What CULL Pro costs (monthly, yearly or once for life), and how a license key works on two computers.",
-        body: read("pages/pro.html").replaceAll("{{supportEmailBlock}}", config.supportEmail
-          ? `<p>Support: <a href="mailto:${config.supportEmail}">${config.supportEmail}</a>.</p>`
-          : ""),
-      }),
-    },
+    { slug: "pro", html: proPage(read) },
+    { slug: "thanks", html: thanksPage(read) },
+    { slug: "key", html: keyPage(read) },
     {
       slug: "changelog",
       html: textPage({
@@ -268,7 +389,7 @@ function build() {
       html: textPage({
         slug: "terms-of-sale",
         title: "Terms of sale",
-        description: "Draft terms for buying CULL Pro, in force from the first sale.",
+        description: "The terms for buying CULL Pro: who sells it, refunds, and cancelling a subscription.",
         source: read("content/terms-of-sale.md"),
       }),
     },
