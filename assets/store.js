@@ -46,6 +46,9 @@
     if (cfg.env === "sandbox") window.Paddle.Environment.set("sandbox");
     window.Paddle.Initialize({
       token: cfg.token,
+      // The look of every checkout on this page, the ones Paddle opens on
+      // its own included: only the dark theme is styled in Paddle.
+      checkout: { settings: { displayMode: "overlay", variant: "one-page", theme: "dark" } },
       eventCallback: function (event) {
         if (!event || !event.name) return;
         if (event.name === "checkout.completed" && ours && event.data && event.data.transaction_id) {
@@ -60,10 +63,7 @@
         var priceId = cfg[e.currentTarget.dataset.buy];
         if (!priceId) return;
         ours = true;
-        window.Paddle.Checkout.open({
-          items: [{ priceId: priceId, quantity: 1 }],
-          settings: { displayMode: "overlay", variant: "one-page", theme: "dark" },
-        });
+        window.Paddle.Checkout.open({ items: [{ priceId: priceId, quantity: 1 }] });
       });
     }
   }
