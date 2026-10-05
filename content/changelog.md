@@ -1,5 +1,11 @@
 # What's new
 
+## 2.6.0 · 2026-10-05
+
+- CULL is ready for its store: CULL Pro will be sold on cull.photography, monthly, yearly or once for life. The key shows on the page after payment and comes by email. Sales open with the public launch.
+- Settings → License has Manage subscription on a monthly or yearly license. It opens Paddle's page, where you change the card, see receipts or cancel; Paddle asks for the email you bought with.
+- The privacy policy describes buying: Paddle is the seller and takes the payment, and the license service is told only what it needs to issue the key and send it.
+
 ## 2.5.1 · 2026-10-04
 
 - A licensed copy says so: a small Pro badge sits beside CULL in the top left.

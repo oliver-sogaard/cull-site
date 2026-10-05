@@ -32,8 +32,10 @@ is `sandbox` the three pages carry a test-mode strip. Paddle.js loads on
 `pro.html` only, Turnstile on `key.html` only; `thanks.html` runs nothing
 but its own script, under a `<meta>` content security policy.
 
-The thank-you page links the installers by name, so `config.version` must
-be the released version: `--sync` after every release.
+The thank-you page links the installers by the fixed names every release
+carries (`CULL-setup.exe`, `CULL.dmg`), so its links hold across versions.
+`config.version` is only the number shown on the home page: set it and `--sync` after
+a release, which also brings the changelog up to date.
 
 Going live: the license service first (see its README), then `env: "live"`
 with the live token and price ids here.

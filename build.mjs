@@ -22,7 +22,7 @@ export const config = {
   name: "CULL",
   tagline: "Keyboard-fast culling for RAW photos",
   downloads: "https://github.com/oliver-sogaard/cull-releases/releases/latest",
-  version: "2.5.1",
+  version: "2.6.0",
   /** Empty until the owner sets them (same values as src/product.ts). */
   supportEmail: "support@cull.photography",
   reportUrl: "",
@@ -224,8 +224,8 @@ function thanksPage(read) {
   const base = `https://github.com/oliver-sogaard/cull-releases/releases/latest/download`;
   const body = read("pages/thanks.html")
     .replaceAll("{{storeAttrs}}", storeAttrs("thanks"))
-    .replaceAll("{{downloadWindows}}", `${base}/CULL_${config.version}_x64-setup.exe`)
-    .replaceAll("{{downloadMac}}", `${base}/CULL_${config.version}_aarch64.dmg`)
+    .replaceAll("{{downloadWindows}}", `${base}/CULL-setup.exe`)
+    .replaceAll("{{downloadMac}}", `${base}/CULL.dmg`)
     .replaceAll("{{supportEmail}}", esc(config.supportEmail));
   return layout({
     slug: "thanks",
