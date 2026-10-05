@@ -1,5 +1,18 @@
 # What's new
 
+## 2.6.1 · 2026-10-05
+
+- Opening a folder can be cancelled: Esc or Cancel on the scanning screen goes back to where you were, for a folder that turns out to be a whole disk.
+- The home screen holds still: the title, the button and the top of the recent list stay where they are however many folders the list has.
+- Settings → License lists this computer first, then the others by when they were last seen.
+- On a Mac, the menu bar is CULL's own: Settings, Open Folders, Finish Cull, Undo, Redo and Select All, the three views, Keyboard Shortcuts and CULL Support each do what their key does, and an item that cannot act right now is greyed out.
+- On a Mac, a computer is listed under the name set in System Settings, not its network name.
+- On a Mac, the brand in the top bar slides into place when full screen has settled and makes room again as soon as the window changes, instead of jumping.
+- On a Mac, the disk image opens straight to the app: no license window in front of it.
+- A staged screen with no frames has a grey dash over its count, not a green one.
+- The unsaved chip underlines only its action ("retry") under the mouse.
+- A problem report's diagnostics say how many processor threads and how much memory the computer has, and the privacy policy says so.
+
 ## 2.6.0 · 2026-10-05
 
 - CULL is ready for its store: CULL Pro will be sold on cull.photography, monthly, yearly or once for life. The key shows on the page after payment and comes by email. Sales open with the public launch.
