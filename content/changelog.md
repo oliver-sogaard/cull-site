@@ -1,5 +1,11 @@
 # What's new
 
+## 2.6.2 · 2026-10-05
+
+- The home screen's text sits near the middle of the window and the recent list takes the lower part, instead of the whole block riding high.
+- On a Mac, the top bar's brand moves as full screen starts, with no wait.
+- On a Mac, Undo and Redo in the Edit menu are greyed out when there is nothing to undo or redo.
+
 ## 2.6.1 · 2026-10-05
 
 - Opening a folder can be cancelled: Esc or Cancel on the scanning screen goes back to where you were, for a folder that turns out to be a whole disk.
