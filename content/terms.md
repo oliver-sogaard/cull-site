@@ -47,7 +47,7 @@ CULL checks for updates when it starts and offers to install them. Installing an
 
 ## No warranty
 
-CULL is provided "as is". The author does not promise that it is free of defects or that it fits a particular purpose. Verdicts are what you decide, written to metadata; Smart culling suggestions are advisory only; you decide what to keep and what to delete, and you should keep backups of your photographs as you would with any other tool.
+CULL is provided "as is". The author does not promise that it is free of defects or that it fits a particular purpose. Verdicts are what you decide, written to metadata; you decide what to keep and what to delete, and you should keep backups of your photographs as you would with any other tool.
 
 ## Limit of liability
 

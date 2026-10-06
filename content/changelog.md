@@ -1,5 +1,13 @@
 # What's new
 
+## 2.7.0 · 2026-10-05
+
+- Compare has a second view, Stacked: the two frames on top of each other in one pane. ↑ and ↓ swap them, and holding the key flips, so a change in framing, focus or a face reads as movement. V switches views while comparing; Settings → General chooses which view Compare opens in.
+- Inside a burst or similar set the challenger is lined up on the champion: moved, turned and scaled so the scenery holds still, in both views and inside the zoom, so a flip at 100 % compares the same spot. A chip above the challenger says Lined up, Could not line up, Different scene or As shot. A switches between lined up and as shot, and Settings → General remembers it.
+- Compare opens on the nearest unrated frame of the champion's own burst or similar set when it has one.
+- Smart culling's suggestions are gone: no ghost marks on unrated frames, no Smart filter, no Smart settings tab, and no scoring of sharpness, exposure, faces or looks. Bursts and similar sets stay. Nothing in CULL judges a photo for you.
+- The 4 key does nothing now; Rejects stays on 5. An old settings file loses its Smart culling settings, and a default filter that pointed at Smart goes back to All.
+
 ## 2.6.2 · 2026-10-05
 
 - The home screen's text sits near the middle of the window and the recent list takes the lower part, instead of the whole block riding high.
