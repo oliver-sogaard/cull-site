@@ -1,5 +1,16 @@
 # What's new
 
+## 2.8.0 · 2026-10-06
+
+- Rejects is on 4. The four filter tabs sit on 1–4 with no gap; 5 does nothing.
+- Stacked: ↑ and ↓ swap the frames at any zoom, 2:1 included. Enter, Backspace and F act on the frame you see: with the champion showing, Enter keeps it, Backspace rejects it and F stars it. The footer names the frame that is showing, and the header says Compare · Side by side or Compare · Stacked.
+- The Lined up chip sits above the photo, never over it, on both sides, and the stacked photo fills the stage as the loupe does.
+- Bursts and similar sets are one idea: a similar set is the scene and holds its bursts, so a burst and the frames shot around it are one set, drawn as one box, and Compare lines them up as one. A burst too varied to look alike keeps its own box.
+- The filmstrip under Compare is the loupe's: every frame with its verdict, the filter dimming the rest, so a verdict just given is seen to have landed. The filter tabs and 1–4 work in Compare.
+- The info rail in Compare shows a histogram for each side.
+- Click to zoom in Compare, in both views: a press on either photo zooms both to that point; drag pans, release exits.
+- About: the update line reads like Up to date. — one small line under Updates, with the button beside it.
+
 ## 2.7.0 · 2026-10-05
 
 - Compare has a second view, Stacked: the two frames on top of each other in one pane. ↑ and ↓ swap them, and holding the key flips, so a change in framing, focus or a face reads as movement. V switches views while comparing; Settings → General chooses which view Compare opens in.
