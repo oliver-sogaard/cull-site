@@ -1,5 +1,12 @@
 # What's new
 
+## 2.10.1 · 2026-10-07
+
+- Hover tips are drawn in CULL's own style and always stay inside the window; the settings gear's tip no longer runs off the edge.
+- Hints and short notices sit in the middle of the top bar, so they never cover a photo, a role label or a control.
+- In Compare side by side both file names are at full strength again; stacked, the frame not showing is quieter.
+- The memory and folder warnings say it in a line.
+
 ## 2.10.0 · 2026-10-07
 
 - F in Compare works like Enter: the frame you judge wins as a favorite and becomes the champion, and the other is rejected. Stacked, with the champion showing, the champion wins as a favorite.
