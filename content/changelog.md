@@ -1,5 +1,19 @@
 # What's new
 
+## 2.10.0 · 2026-10-07
+
+- F in Compare works like Enter: the frame you judge wins as a favorite and becomes the champion, and the other is rejected. Stacked, with the champion showing, the champion wins as a favorite.
+- The verdict sits beside each name in the footer, in the loupe and in Compare alike; nothing is drawn over a photo any more.
+- Compare opens from any frame, a reject included, and the challenger is always a frame the filter shows. With nothing else in the filter, C says so.
+- A burst is a held shutter, nothing else. Single shots, self-timer and bracketing never form one, and each drive mode keeps its own pace, learned from the shoot, so two quick presses no longer join.
+- In the grid, the similar rail has its own lane under each row, clear of the burst boxes, the names and the selection.
+- In Compare side by side both names are quiet; stacked, the one showing is full.
+- Every key the app shows is a keycap, the same as in the keys sheet: the footer, Settings, dialogs, hints and hover tips.
+- Settings and the keys sheet say it in a word or two.
+- The verdict glyphs sit dead centre in their circles.
+- Lining up waits for each frame's proportions, so the first frames of a set no longer land a little off, and a big set lines up a few frames at a time on a slow drive.
+- The image cache rebuilds once after the update, so a shoot opened before reads its previews again the first time.
+
 ## 2.9.0 · 2026-10-06
 
 - Bursts and similar sets are drawn as two layers, in the filmstrip and the grid: a box around each burst, a thin rail under each similar set with its own count, so a scene that holds a burst shows both. Bursts stay strict; similar is looser, so a step to the side or a change of framing stays in the scene, and one odd frame no longer splits a scene in two.
