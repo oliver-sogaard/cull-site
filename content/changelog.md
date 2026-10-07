@@ -1,5 +1,15 @@
 # What's new
 
+## 2.9.0 · 2026-10-06
+
+- Bursts and similar sets are drawn as two layers, in the filmstrip and the grid: a box around each burst, a thin rail under each similar set with its own count, so a scene that holds a burst shows both. Bursts stay strict; similar is looser, so a step to the side or a change of framing stays in the scene, and one odd frame no longer splits a scene in two.
+- Compare follows the filter: ← and → and the filmstrip step through the frames the filter shows. Unrated keeps you on the job; All lets you go back to a rated frame. A win or a keep-both never demotes a favorite.
+- Dragging while zoomed with the mouse works in Compare.
+- The footer in Compare names both frames, colour-coded by role, the one being judged in full.
+- Home, End, PgUp and PgDn belong to the grid alone; in the loupe and Compare they were unpredictable jumps along the filmstrip.
+- Compare opens as shot; lining up is the extra, on A or in Settings.
+- When a frame carries a purple label from Lightroom, a verdict that cannot land says so in a short line instead of doing nothing.
+
 ## 2.8.0 · 2026-10-06
 
 - Rejects is on 4. The four filter tabs sit on 1–4 with no gap; 5 does nothing.
