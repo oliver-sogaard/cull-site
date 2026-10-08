@@ -1,5 +1,10 @@
 # What's new
 
+## 2.10.2 · 2026-10-07
+
+- Settings → General → Hints → Show again brings back the first-cull and Compare hints, from the first. Mid-cull, what you have already done counts at once.
+- A button that is resting now looks it instead of lighting up on hover.
+
 ## 2.10.1 · 2026-10-07
 
 - Hover tips are drawn in CULL's own style and always stay inside the window; the settings gear's tip no longer runs off the edge.
