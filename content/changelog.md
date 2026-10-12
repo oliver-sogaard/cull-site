@@ -1,5 +1,10 @@
 # What's new
 
+## 2.12.0 · 2026-10-12
+
+- Lightroom's keys work beside CULL's own: P keeps, X rejects, E opens the loupe and J shows clipping. Enter, Backspace, L and H still do, and each pair is in Settings → Keys.
+- Focus peaking moved from P to S so that P could be Keep. If P was in your fingers, S is the key now, or set it back in Settings → Keys. If a key you had chosen earlier was S, Focus peaking is left without one: give it one there.
+
 ## 2.11.1 · 2026-10-12
 
 - An action left without a key is no longer named in quotes in its place: the sentence or clause that named it is left out, a tip keeps its words, and lists say "No key".
