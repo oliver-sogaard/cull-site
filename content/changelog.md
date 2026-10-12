@@ -1,5 +1,12 @@
 # What's new
 
+## 2.11.0 · 2026-10-11
+
+- Every key can be changed: Settings → Keys lists each action with up to two keys. Click a slot, press the key. A key another action uses asks before it moves; Esc, F6 and the dialog keys stay as they are.
+- A chosen key stays on the physical key you pressed, so it works the same on any keyboard layout; the defaults are unchanged.
+- The keys sheet, every keycap, the hints, the welcome and the macOS menu show the keys you set. Actions left without a key are counted at the foot of the sheet.
+- The keys sheet lists Ctrl Y for Redo beside Ctrl Shift Z.
+
 ## 2.10.2 · 2026-10-07
 
 - Settings → General → Hints → Show again brings back the first-cull and Compare hints, from the first. Mid-cull, what you have already done counts at once.
