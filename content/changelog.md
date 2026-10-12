@@ -1,5 +1,11 @@
 # What's new
 
+## 2.11.1 · 2026-10-12
+
+- An action left without a key is no longer named in quotes in its place: the sentence or clause that named it is left out, a tip keeps its words, and lists say "No key".
+- Typing one of an action's default keys back into a slot counts as the default again, so clearing the other key leaves the row unchanged and the reset arrow goes.
+- Settings → Keys: a row that follows another is stepped in under it; the help rows read "Help" and "Pin help".
+
 ## 2.11.0 · 2026-10-11
 
 - Every key can be changed: Settings → Keys lists each action with up to two keys. Click a slot, press the key. A key another action uses asks before it moves; Esc, F6 and the dialog keys stay as they are.
