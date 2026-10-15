@@ -14,7 +14,7 @@ node serve.mjs          # look at docs/ on http://127.0.0.1:8188/
   `build.mjs` (headings, paragraphs, lists, bold, links). `changelog.md`,
   `privacy.md` and `terms.md` are copies of the app's files: change them in
   the app repository and run `--sync`. `terms-of-sale.md` lives here.
-- `pages/*.html` — page bodies written by hand (home, formats, support, press).
+- `pages/*.html` — page bodies written by hand (home, formats, install, support, press).
 - `assets/` — the stylesheet (the app's tokens), fonts, icon, screenshots.
 - `build.mjs` `config` — version shown on the download buttons, the
   downloads address, the support email (empty until one exists).

@@ -165,7 +165,7 @@ ${body}
     <footer class="footer">
       <div class="wrap footer__row">
         <div>
-          <a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
+          <a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
         </div>
         <div>© ${config.year} ${esc(config.owner)}</div>
       </div>
@@ -220,12 +220,15 @@ function proPage(read) {
   });
 }
 
+/** The installers under their fixed names (the release workflow keeps a
+ *  copy of each without the version in its name). */
+const DL = "https://github.com/oliver-sogaard/cull-releases/releases/latest/download";
+
 function thanksPage(read) {
-  const base = `https://github.com/oliver-sogaard/cull-releases/releases/latest/download`;
   const body = read("pages/thanks.html")
     .replaceAll("{{storeAttrs}}", storeAttrs("thanks"))
-    .replaceAll("{{downloadWindows}}", `${base}/CULL-setup.exe`)
-    .replaceAll("{{downloadMac}}", `${base}/CULL.dmg`)
+    .replaceAll("{{downloadWindows}}", `${DL}/CULL-setup.exe`)
+    .replaceAll("{{downloadMac}}", `${DL}/CULL.dmg`)
     .replaceAll("{{supportEmail}}", esc(config.supportEmail));
   return layout({
     slug: "thanks",
@@ -364,6 +367,19 @@ function build() {
           .replaceAll("{{supportEmailBlock}}", config.supportEmail
             ? `<p>Or write to <a href="mailto:${config.supportEmail}">${config.supportEmail}</a>.</p>`
             : ""),
+      }),
+    },
+    {
+      slug: "install",
+      html: layout({
+        slug: "install",
+        title: "Installing CULL",
+        description:
+          "How to install CULL on Windows and Mac, what the Windows SmartScreen screen means for an unsigned installer, and how to check a download by its checksum.",
+        body: read("pages/install.html")
+          .replaceAll("{{downloads}}", config.downloads)
+          .replaceAll("{{downloadWindows}}", `${DL}/CULL-setup.exe`)
+          .replaceAll("{{downloadMac}}", `${DL}/CULL.dmg`),
       }),
     },
     {

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Installing CULL</title>
+    <meta name="description" content="How to install CULL on Windows and Mac, what the Windows SmartScreen screen means for an unsigned installer, and how to check a download by its checksum." />
+    <!-- Not released: removed on launch day. -->
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="./assets/icon-64.png" />
+    <link rel="stylesheet" href="./assets/site.css" />
+    <link rel="stylesheet" href="./assets/pages.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="wrap nav__row">
+        <a class="nav__brand" href="./">CULL</a>
+        <nav class="nav__links" aria-label="Site">
+          <a href="./formats.html">Formats</a>
+          <a href="./changelog.html">Changelog</a>
+          <a href="./support.html">Support</a>
+          <a href="./pro.html" class="is-cta">Pro</a>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap page">
+      <article class="prose">
+        <h1>Installing CULL</h1>
+        <p class="hero__lead">
+          One download for Windows, one for Mac, both from the
+          <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest">downloads page</a>. The app updates itself from then on.
+        </p>
+
+        <h2 id="windows">Windows</h2>
+        <p>
+          Download <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest/download/CULL-setup.exe">CULL-setup.exe</a> and open it. The first time,
+          Windows shows this:
+        </p>
+        <div class="dialogs">
+          <figure class="plate dialog">
+            <img src="./assets/smartscreen-1.png" width="800" height="750" alt="A Windows dialog titled Windows protected your PC. It says Microsoft Defender SmartScreen prevented an unrecognized app from starting, with a More info link and a Don't run button." loading="lazy" />
+            <figcaption>1. Click <strong>More info</strong>.</figcaption>
+          </figure>
+          <figure class="plate dialog">
+            <img src="./assets/smartscreen-2.png" width="800" height="750" alt="The same dialog after More info: App CULL-setup.exe, Publisher Unknown publisher, and a Run anyway button beside Don't run." loading="lazy" />
+            <figcaption>2. Click <strong>Run anyway</strong>.</figcaption>
+          </figure>
+        </div>
+        <p>
+          The screen means the installer carries no publisher certificate. It does not mean
+          anything was found in it. Windows shows it for any installer it has not seen many
+          times before, and the updates CULL installs later do not show it.
+        </p>
+        <h3>Why it is not signed</h3>
+        <p>
+          CULL is made by one person, Oliver Søgaard-Andersen. A Windows signing certificate
+          costs more each year than CULL earns, so the installer goes out unsigned. If that
+          changes, the screen goes away on its own.
+        </p>
+        <h3>Check the download yourself</h3>
+        <p>
+          Each release lists the SHA-256 of both installers and a VirusTotal link, where
+          seventy-odd antivirus engines report on that exact file. To compare the checksum,
+          open PowerShell and run <code>Get-FileHash ~\Downloads\CULL-setup.exe</code>; the
+          hash it prints should match the one on the
+          <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest">downloads page</a>.
+        </p>
+
+        <h2 id="mac">Mac</h2>
+        <p>
+          Download <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest/download/CULL.dmg">CULL.dmg</a>, open it, and drag CULL to
+          Applications. CULL runs on Apple silicon Macs.
+        </p>
+        <p>
+          Until CULL is notarised by Apple, the first launch says the app could not be
+          verified. Close that message, open <strong>System Settings → Privacy &amp;
+          Security</strong>, scroll down to the line that names CULL, click
+          <strong>Open Anyway</strong> and confirm. From then on it opens like any app.
+        </p>
+        <p>
+          To check the download, open Terminal and run
+          <code>shasum -a 256 ~/Downloads/CULL.dmg</code> and compare it with the
+          <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest">downloads page</a>.
+        </p>
+
+        <h2>Then</h2>
+        <p>
+          Open a folder of RAW files, or drop one on the window. Press
+          <span class="kbd">Tab</span> for the keys. Something wrong?
+          <a href="./support.html">Support.</a>
+        </p>
+      </article>
+
+    </main>
+    <footer class="footer">
+      <div class="wrap footer__row">
+        <div>
+          <a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
+        </div>
+        <div>© 2026 Oliver Søgaard-Andersen</div>
+      </div>
+    </footer>
+  </body>
+</html>

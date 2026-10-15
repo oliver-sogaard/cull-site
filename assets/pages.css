@@ -481,3 +481,29 @@
     grid-column: 2;
   }
 }
+
+/* the install page: two screenshots of the same dialog, side by side */
+.dialogs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 8px 0 20px;
+}
+
+.dialog {
+  flex: 1 1 280px;
+  max-width: 410px;
+  margin: 0;
+}
+
+.dialog figcaption {
+  padding: 10px 14px 12px;
+  font-size: 0.9375rem;
+  color: var(--text-2);
+  border-top: 1px solid var(--border);
+}
+
+.prose ol {
+  margin: 0 0 18px;
+  padding-left: 22px;
+}
