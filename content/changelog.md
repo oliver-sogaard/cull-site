@@ -1,5 +1,21 @@
 # What's new
 
+## 2.13.0 · 2026-10-15
+
+- A shoot you reopen groups its bursts and similar sets at once: the signals each frame gave last time are kept, so nothing is read or computed again.
+- Two frames with the same name in two folders can't share one sidecar: the second is refused with a plain reason and shown as unwritable, so a verdict never lands on the wrong frame. A sidecar that belongs to another frame is never overwritten.
+- A favorite on a frame with a Lightroom label is refused in every view, Compare included, and the label is left as it is. Clearing a verdict never touches a star or a label.
+- Move rejects and the Trash leave a sidecar in place when another frame in the folder shares its name, and say so, instead of carrying that frame's stars and edits away. A label press on a sidecar Lightroom wrote with a language mark lands in place.
+- A Nikon shot at an expanded ISO (Lo 1.0, Hi 2.0) shows its ISO; those bodies write it in a different place.
+- The license tab says what happened in one sentence per case: a key the service refused keeps the field for another key and a Remove row beside it; a paused subscription says so; a clock set ahead is named as that. A renewal at a new price keeps Pro.
+- About → Third-party licenses is readable: one line per package, and the full text of every license after the lists, ONNX Runtime and the fonts included. The license terms are version 3 and the privacy policy version 4; both are in About and on cull.photography.
+- Settings: "Reset every setting?" and "Remove the license from this computer?" are asked in words, with Reset or Remove beside Cancel. The Stars and labels section is named for what it holds; the pinned folder has one name everywhere; the drive setting says "network drive (NAS)".
+- The status bar counts with separators, "1 keep" reads as one, and "All 1,240 decided" replaces "rated". Zoom reads "200 %". The keys sheet is called that everywhere, Esc's row reads Home, and a key that can't be chosen is explained with the keys drawn as caps.
+- The loupe's filmstrip computes overlays only for the frames on screen, and the changelog and notices load with their sheet, so the first frame of a shoot appears sooner on a slow drive.
+- A problem report's screenshot is stripped of its metadata before it goes. Settings import refuses a file that isn't a CULL settings file.
+- Upgrading removes the model files earlier versions left behind.
+- Under the hood: the image store, the session hooks and the key-override logic are split into focused modules; one table lists every format; the model-free build is compiled in CI; the test suites gained line floors and the format suites now check ISO, orientation and a file with no preview on every sample.
+
 ## 2.12.0 · 2026-10-12
 
 - Lightroom's keys work beside CULL's own: P keeps, X rejects, E opens the loupe and J shows clipping. Enter, Backspace, L and H still do, and each pair is in Settings → Keys.
@@ -7,7 +23,7 @@
 
 ## 2.11.1 · 2026-10-12
 
-- An action left without a key is no longer named in quotes in its place: the sentence or clause that named it is left out, a tip keeps its words, and lists say "No key".
+- An action left without a key is no longer shown in quotes. Hints leave out the part that named it, tips keep their words, and lists say "No key".
 - Typing one of an action's default keys back into a slot counts as the default again, so clearing the other key leaves the row unchanged and the reset arrow goes.
 - Settings → Keys: a row that follows another is stepped in under it; the help rows read "Help" and "Pin help".
 
@@ -26,30 +42,30 @@
 ## 2.10.1 · 2026-10-07
 
 - Hover tips are drawn in CULL's own style and always stay inside the window; the settings gear's tip no longer runs off the edge.
-- Hints and short notices sit in the middle of the top bar, so they never cover a photo, a role label or a control.
+- Hints and short notices sit in the middle of the top bar, so they never cover a frame, a role label or a control.
 - In Compare side by side both file names are at full strength again; stacked, the frame not showing is quieter.
-- The memory and folder warnings say it in a line.
+- The memory and folder warnings are one short line each.
 
 ## 2.10.0 · 2026-10-07
 
 - F in Compare works like Enter: the frame you judge wins as a favorite and becomes the champion, and the other is rejected. Stacked, with the champion showing, the champion wins as a favorite.
-- The verdict sits beside each name in the footer, in the loupe and in Compare alike; nothing is drawn over a photo any more.
+- The verdict sits beside each name in the footer, in the loupe and in Compare alike; nothing is drawn over a frame any more.
 - Compare opens from any frame, a reject included, and the challenger is always a frame the filter shows. With nothing else in the filter, C says so.
 - A burst is a held shutter, nothing else. Single shots, self-timer and bracketing never form one, and each drive mode keeps its own pace, learned from the shoot, so two quick presses no longer join.
 - In the grid, the similar rail has its own lane under each row, clear of the burst boxes, the names and the selection.
 - In Compare side by side both names are quiet; stacked, the one showing is full.
 - Every key the app shows is a keycap, the same as in the keys sheet: the footer, Settings, dialogs, hints and hover tips.
-- Settings and the keys sheet say it in a word or two.
-- The verdict glyphs sit dead centre in their circles.
+- Settings and the keys sheet use shorter labels.
+- The verdict glyphs sit dead center in their circles.
 - Lining up waits for each frame's proportions, so the first frames of a set no longer land a little off, and a big set lines up a few frames at a time on a slow drive.
-- The image cache rebuilds once after the update, so a shoot opened before reads its previews again the first time.
+- The preview cache rebuilds once after the update, so a shoot opened before reads its previews again the first time.
 
 ## 2.9.0 · 2026-10-06
 
 - Bursts and similar sets are drawn as two layers, in the filmstrip and the grid: a box around each burst, a thin rail under each similar set with its own count, so a scene that holds a burst shows both. Bursts stay strict; similar is looser, so a step to the side or a change of framing stays in the scene, and one odd frame no longer splits a scene in two.
-- Compare follows the filter: ← and → and the filmstrip step through the frames the filter shows. Unrated keeps you on the job; All lets you go back to a rated frame. A win or a keep-both never demotes a favorite.
+- Compare follows the filter: ← and → and the filmstrip step through the frames the filter shows. Unrated keeps you on the job; All lets you go back to a frame with a verdict. A win or a keep-both never demotes a favorite.
 - Dragging while zoomed with the mouse works in Compare.
-- The footer in Compare names both frames, colour-coded by role, the one being judged in full.
+- The footer in Compare names both frames, color-coded by role, the one being judged in full.
 - Home, End, PgUp and PgDn belong to the grid alone; in the loupe and Compare they were unpredictable jumps along the filmstrip.
 - Compare opens as shot; lining up is the extra, on A or in Settings.
 - When a frame carries a purple label from Lightroom, a verdict that cannot land says so in a short line instead of doing nothing.
@@ -57,44 +73,44 @@
 ## 2.8.0 · 2026-10-06
 
 - Rejects is on 4. The four filter tabs sit on 1–4 with no gap; 5 does nothing.
-- Stacked: ↑ and ↓ swap the frames at any zoom, 2:1 included. Enter, Backspace and F act on the frame you see: with the champion showing, Enter keeps it, Backspace rejects it and F stars it. The footer names the frame that is showing, and the header says Compare · Side by side or Compare · Stacked.
-- The Lined up chip sits above the photo, never over it, on both sides, and the stacked photo fills the stage as the loupe does.
+- Stacked: ↑ and ↓ swap the frames at any zoom, 200 % included. Enter, Backspace and F act on the frame you see: with the champion showing, Enter keeps it, Backspace rejects it and F makes it a favorite. The footer names the frame that is showing, and the header says Compare · Side by side or Compare · Stacked.
+- The Lined up chip sits above the frame, never over it, on both sides, and the stacked frame fills the stage as the loupe does.
 - Bursts and similar sets are one idea: a similar set is the scene and holds its bursts, so a burst and the frames shot around it are one set, drawn as one box, and Compare lines them up as one. A burst too varied to look alike keeps its own box.
 - The filmstrip under Compare is the loupe's: every frame with its verdict, the filter dimming the rest, so a verdict just given is seen to have landed. The filter tabs and 1–4 work in Compare.
 - The info rail in Compare shows a histogram for each side.
-- Click to zoom in Compare, in both views: a press on either photo zooms both to that point; drag pans, release exits.
-- About: the update line reads like Up to date. — one small line under Updates, with the button beside it.
+- Click to zoom in Compare, in both views: a press on either frame zooms both to that point; drag pans, release exits.
+- About: the update line is one short sentence, such as "Up to date.", under Updates, with the button beside it.
 
 ## 2.7.0 · 2026-10-05
 
 - Compare has a second view, Stacked: the two frames on top of each other in one pane. ↑ and ↓ swap them, and holding the key flips, so a change in framing, focus or a face reads as movement. V switches views while comparing; Settings → General chooses which view Compare opens in.
 - Inside a burst or similar set the challenger is lined up on the champion: moved, turned and scaled so the scenery holds still, in both views and inside the zoom, so a flip at 100 % compares the same spot. A chip above the challenger says Lined up, Could not line up, Different scene or As shot. A switches between lined up and as shot, and Settings → General remembers it.
 - Compare opens on the nearest unrated frame of the champion's own burst or similar set when it has one.
-- Smart culling's suggestions are gone: no ghost marks on unrated frames, no Smart filter, no Smart settings tab, and no scoring of sharpness, exposure, faces or looks. Bursts and similar sets stay. Nothing in CULL judges a photo for you.
+- Smart culling's suggestions are gone: no ghost marks on unrated frames, no Smart filter, no Smart settings tab, and no scoring of sharpness, exposure, faces or looks. Bursts and similar sets stay. Nothing in CULL judges a frame for you.
 - The 4 key does nothing now; Rejects stays on 5. An old settings file loses its Smart culling settings, and a default filter that pointed at Smart goes back to All.
 
 ## 2.6.2 · 2026-10-05
 
 - The home screen's text sits near the middle of the window and the recent list takes the lower part, instead of the whole block riding high.
 - On a Mac, the top bar's brand moves as full screen starts, with no wait.
-- On a Mac, Undo and Redo in the Edit menu are greyed out when there is nothing to undo or redo.
+- On a Mac, Undo and Redo in the Edit menu are grayed out when there is nothing to undo or redo.
 
 ## 2.6.1 · 2026-10-05
 
-- Opening a folder can be cancelled: Esc or Cancel on the scanning screen goes back to where you were, for a folder that turns out to be a whole disk.
+- Opening a folder can be canceled: Esc or Cancel on the scanning screen goes back to where you were, for a folder that turns out to be a whole drive.
 - The home screen holds still: the title, the button and the top of the recent list stay where they are however many folders the list has.
 - Settings → License lists this computer first, then the others by when they were last seen.
-- On a Mac, the menu bar is CULL's own: Settings, Open Folders, Finish Cull, Undo, Redo and Select All, the three views, Keyboard Shortcuts and CULL Support each do what their key does, and an item that cannot act right now is greyed out.
+- On a Mac, the menu bar is CULL's own: Settings, Open Folders, Finish Cull, Undo, Redo and Select All, the three views, Keyboard Shortcuts and CULL Support each do what their key does, and an item that cannot act right now is grayed out.
 - On a Mac, a computer is listed under the name set in System Settings, not its network name.
 - On a Mac, the brand in the top bar slides into place when full screen has settled and makes room again as soon as the window changes, instead of jumping.
 - On a Mac, the disk image opens straight to the app: no license window in front of it.
-- A staged screen with no frames has a grey dash over its count, not a green one.
+- A staged screen with no frames has a gray dash over its count, not a green one.
 - The unsaved chip underlines only its action ("retry") under the mouse.
 - A problem report's diagnostics say how many processor threads and how much memory the computer has, and the privacy policy says so.
 
 ## 2.6.0 · 2026-10-05
 
-- CULL is ready for its store: CULL Pro will be sold on cull.photography, monthly, yearly or once for life. The key shows on the page after payment and comes by email. Sales open with the public launch.
+- CULL Pro will be sold on cull.photography, monthly, yearly or once for life. The key shows on the page after payment and comes by email.
 - Settings → License has Manage subscription on a monthly or yearly license. It opens Paddle's page, where you change the card, see receipts or cancel; Paddle asks for the email you bought with.
 - The privacy policy describes buying: Paddle is the seller and takes the payment, and the license service is told only what it needs to issue the key and send it.
 
@@ -136,7 +152,7 @@
 - Removing another computer from the license asks the same way everything else in Settings does: Remove?, Cancel, and twenty seconds to change your mind.
 - The Free cap on the staged screen names why a key was withdrawn or removed, and offers Get CULL Pro next to Add license.
 - About has a Support row with the address. The license messages point there, and say the key comes from your email.
-- Installing an update waits for ratings still on their way to disk, as closing the app does.
+- Installing an update waits for verdicts still on their way to disk, as closing the app does.
 - A half-written Feedback report survives a look at another Settings tab, and a crash report offered at launch is offered once.
 - Settings → License: the plan pill takes the focus when the plan changes, and the seats-full list is announced.
 - The license terms describe the Pro license (two computers, the online check, subscriptions, lifetime, refunds), and the privacy policy names the processors and how long license data is kept. Both are version 2.
@@ -148,7 +164,7 @@
 
 ## 2.3.0 · 2026-10-02
 
-- Settings, reorganised. Every tab is two or three labelled groups with a hairline between them, the controls line up in one column, and on the tabs that have one, the row you reach for least, reset or remove, sits last in the same place.
+- Settings, reorganized. Every tab is two or three labeled groups with a hairline between them, the controls line up in one column, and on the tabs that have one, the row you reach for least, reset or remove, sits last in the same place.
 - About shows the version, the update check and the plan as rows; the links sit at the foot.
 - Settings → License: on Pro the computers group is headed "Computers · 1 of 2" and a free seat is drawn; on Free the key field has its own group and an error appears on a reserved line, so nothing jumps.
 - A Free copy with no key sees what Pro is, in one line, on the home screen and at the foot of the License tab. The prices will be on the website.
@@ -159,8 +175,8 @@
 - A revoked key, a freed seat or an ended license now reaches the app at the next launch, and when Settings → License is opened, not up to twelve hours later.
 - A computer removed from the license (from another computer or by support) goes back to Free at once and offers "Use this computer again"; CULL no longer takes a seat back on its own.
 - Settings → License: the key field formats as you type and Add license waits for a whole key; the key and computers rows run the full width; the seats line says when a seat is free; an ended license says the day it ended.
-- Dragging or double-clicking the home screen no longer moves or un-maximises the window; only the title bar does.
-- The privacy policy says what the author can see about a license.
+- Dragging or double-clicking the home screen no longer moves or un-maximizes the window; only the title bar does.
+- The privacy policy says who can see what about a license.
 
 ## 2.2.0 · 2026-10-02
 
@@ -196,30 +212,30 @@
 
 ## 2.1.1 · 2026-09-30
 
-- Help has a toggle: F1 opens the keys sheet and keeps it open until F1 or Esc. Holding Tab still shows it for as long as it is held.
+- The keys sheet has a toggle: F1 opens it and keeps it open until F1 or Esc. Holding Tab still shows it for as long as it is held.
 - Updating no longer makes the next launch say CULL didn't close properly.
 - A dialog opened with the mouse no longer lights up its first button; opened from the keyboard, it still starts on the safe choice.
 - Settings → General: the default overlays row wraps instead of forcing a sideways scroll.
 - Scrollbars match the app instead of the system's white ones.
 - The recent folders list gives keyboard focus room around each row.
-- What's new has space above its footer; over the Free limit, the staged screen no longer suggests adding folders. The keys sheet no longer shows a light seam under the title bar.
+- What's new has space above its footer; over the Free cap, the staged screen no longer suggests adding folders. The keys sheet no longer shows a light seam under the title bar.
 
 ## 2.1.0 · 2026-09-30
 
-- Faster on big shoots: a rating no longer stalls for a moment while the smart suggestions catch up, scrubbing stays smooth while thumbnails fill in, and the loupe and compare panes stop repainting for changes behind them.
-- Faster on a NAS: moving rejects does one file operation per frame instead of six, opening a shoot of DNGs no longer looks for a sidecar beside every file, filmstrip thumbnails read a tenth of the data, and cache hits copy nothing.
+- Faster on big shoots: a verdict no longer stalls for a moment while the smart suggestions catch up, scrubbing stays smooth while thumbnails fill in, and the loupe and compare panes stop repainting for changes behind them.
+- Faster on a network drive (NAS): moving rejects does one file operation per frame instead of six, opening a shoot of DNGs no longer looks for a sidecar beside every file, filmstrip thumbnails read a tenth of the data, and cache hits copy nothing.
 - Smart culling scores frames on several cores when the shoot is on a local drive.
-- Rating, starring or labelling a DNG keeps its cached previews, so reopening a culled DNG shoot is instant again.
+- Setting a verdict, stars or a label on a DNG keeps its cached previews, so reopening a culled DNG shoot is instant again.
 - A frame with no embedded preview (some DNGs, a CR2 without one) shows as unavailable in the grid instead of retrying forever.
-- Capture-time order: a DNG whose XMP another tool had written, or a frame whose date sat right at a read boundary, could lose its capture time and sort by file date. Fixed.
+- Capture-time order holds for a DNG whose XMP another tool had written, and for a frame whose date sat right at a read boundary; either could lose its capture time and sort by file date.
 - The Finish button in the status bar no longer reopens the dialog with the previous run's result.
-- Copying keeps to an export folder flushes each file to disk before it counts as done, so a power cut cannot leave a truncated copy that later looks finished.
+- Copying keeps to another folder flushes each file to disk before it counts as done, so a power cut cannot leave a truncated copy that later looks finished.
 - Settings are saved a moment after the last change instead of on every change, and always before a quit, an export or an update.
 - Keyboard: Ctrl R retries changes that didn't save and re-checks an unreachable folder. F6 moves focus between the frame, the status bars and the info rail; there, Enter and Space press a button, the arrows move between buttons, and Esc returns to the frame.
 - Screen readers hear saving and failed saves, the folder and memory chips, analyzing progress, Finish results and a copied report. The grid and filmstrips are lists of named frames (verdict, stars, label). Dialogs keep focus inside and start on the safe choice, so Enter on Stay stays.
 - With unsaved changes, the leave dialog and the Finish dialog offer Retry saving.
 - Two-step confirms say what they do, wait 20 seconds, and cancel on Esc or when focus moves away. Windows says Recycle Bin.
-- Wording: frames rather than ratings or images, Filmstrip, Finish the cull, Lightroom rating, key names like Ctrl E and Shift 3, Center guide, and error messages that say what to do next. Counts get thousands separators. Leica is named among the formats.
+- Clearer words throughout: frames, Filmstrip, Finish the cull, Lightroom rating, key names like Ctrl E and Shift 3, Center guide, and error messages that say what to do next. Counts get thousands separators. Leica is named among the formats.
 - Quieter text is brighter, and text fields have a visible border.
 - Report a problem: one "Save as file", "Copied." feedback, and a note when no mail program opens.
 - The license terms and privacy policy state what the app does today: a key is checked on this computer and nothing is sent. There is no trial, and the terms no longer mention one.
@@ -229,20 +245,20 @@
 
 - Settings live in a file (settings.json in the app's data folder) and move there on their own from earlier versions. Settings → Storage can export them to a file and import them on another computer.
 - About: a "Check for updates" button, and the Third-party licenses page now lists every component in the app, not only the models.
-- The Windows installer shows the license terms, installs for the current user, and on uninstall removes the image cache and logs. Sidecars are never touched.
+- The Windows installer shows the license terms, installs for the current user, and on uninstall removes the preview cache and logs. Sidecars are never touched.
 
 ## 2.0.0 · 2026-09-29
 
-- CULL Free and CULL Pro. Free has every feature and culls up to 250 frames in one session. Pro has no limit. A license key goes in under Settings → License; "Remove license from this computer" takes it out again.
-- The limit is decided by the app itself when a cull begins, on the whole staged set, so it holds whatever folders are opened.
+- CULL Free and CULL Pro. Free has every feature and culls up to 250 frames in one session. Pro has no cap. A license key goes in under Settings → License; "Remove license from this computer" takes it out again.
+- The cap is decided by the app itself when a cull begins, on the whole staged set, so it holds whatever folders are opened.
 
 ## 1.9.2 · 2026-09-29
 
-- About links to the website, and Report a problem can email support directly: cull.help@outlook.com.
+- About links to the website. Report a problem can email support directly.
 
 ## 1.9.1 · 2026-09-29
 
-- The first-cull hint floats over the bottom of the photo instead of sitting in the status bar, so it has room at every window size.
+- The first-cull hint floats over the bottom of the frame instead of sitting in the status bar, so it has room at every window size.
 - About: "Licenses" is now "Third-party licenses", to tell it from the license terms.
 
 ## 1.9.0 · 2026-09-29
@@ -252,7 +268,7 @@
 
 ## 1.8.0 · 2026-09-29
 
-- Report a problem from About: what happened, what you expected, and diagnostics you can read before they leave your computer. With no report server set up yet, the report is saved as a file and shown in your file manager.
+- Report a problem from About: what happened, what you expected, and diagnostics you can read before they leave your computer. The report is saved as a file and shown in your file manager.
 - A log file, kept on this computer (Settings → Storage → Open log folder). It never contains file or folder names, or paths: a path is reduced to its file extension before it is written. Diagnostic logging adds detail when you are asked for it.
 - If CULL closes unexpectedly, the next start says so and offers to report it.
 
@@ -302,4 +318,4 @@
 
 ## 1.0.0 · 2026-09-21
 
-- First release: keyboard-fast culling of Canon CR3 files with Lightroom-compatible verdicts, smart-culling suggestions, and automatic updates.
+- First release: keyboard-first culling of Canon CR3 files with Lightroom-compatible verdicts, smart-culling suggestions, and automatic updates.
