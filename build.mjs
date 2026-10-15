@@ -16,13 +16,13 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const out = path.join(here, "docs");
-const app = path.join(here, "..", "cull");
+/** The app checkout `--sync` copies from: ../cull, or the folder in CULL_APP. */
+const app = process.env.CULL_APP ? path.resolve(process.env.CULL_APP) : path.join(here, "..", "cull");
 
 export const config = {
   name: "CULL",
-  tagline: "Keyboard-fast culling for RAW photos",
+  tagline: "Keyboard-first culling for RAW shoots",
   downloads: "https://github.com/oliver-sogaard/cull-releases/releases/latest",
-  version: "2.10.2",
   /** Empty until the owner sets them (same values as src/product.ts). */
   supportEmail: "support@cull.photography",
   reportUrl: "",
@@ -115,7 +115,7 @@ export function md(source) {
 const nav = (active) =>
   [
     ["formats", "Formats"],
-    ["changelog", "Changelog"],
+    ["changelog", "What's new"],
     ["support", "Support"],
     ["pro", "Pro", "is-cta"],
   ]
@@ -165,7 +165,7 @@ ${body}
     <footer class="footer">
       <div class="wrap footer__row">
         <div>
-          <a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">Changelog</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
+          <a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
         </div>
         <div>© ${config.year} ${esc(config.owner)}</div>
       </div>
@@ -206,7 +206,7 @@ function proPage(read) {
       "{{storeNote}}",
       selling()
         ? ""
-        : `<p class="buy__fine">Sales open soon. Until then there is nothing to buy here, and CULL Free is the whole app up to 250 frames a session, with no time limit.</p>`,
+        : `<p class="buy__fine">Sales open soon. Until then there's nothing to buy here. Free culls up to 250 frames in one session, with no time limit.</p>`,
     )
     .replaceAll("{{supportEmailBlock}}", supportBlock);
   return layout({
@@ -329,10 +329,10 @@ function build() {
       slug: "index",
       html: layout({
         slug: "index",
-        title: "CULL — keyboard-fast culling for RAW photos",
+        title: "CULL — keyboard-first culling for RAW shoots",
         description:
-          "CULL is a desktop app that culls a RAW shoot in minutes: keep, reject and favorite by keyboard, with verdicts saved where Lightroom reads them. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic and DNG.",
-        body: read("pages/home.html").replaceAll("{{version}}", config.version).replaceAll("{{downloads}}", config.downloads),
+          "CULL is a desktop app that culls a RAW shoot in minutes: keep, reject and favorite by keyboard, with verdicts saved where Lightroom reads them. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG.",
+        body: read("pages/home.html").replaceAll("{{downloads}}", config.downloads),
         wide: true,
       }),
     },
@@ -341,7 +341,7 @@ function build() {
       html: layout({
         slug: "formats",
         title: "Formats — CULL",
-        description: "Which RAW formats CULL opens, and what each one gives: zoom to 100 %, the AF point, and burst grouping, measured body by body.",
+        description: "Which RAW formats CULL opens, and what each one gives: full-size zoom, the AF point, and burst grouping, measured body by body.",
         body: read("pages/formats.html"),
       }),
     },
@@ -405,7 +405,7 @@ function build() {
       html: textPage({
         slug: "terms-of-sale",
         title: "Terms of sale",
-        description: "The terms for buying CULL Pro: who sells it, refunds, and cancelling a subscription.",
+        description: "The terms for buying CULL Pro: who sells it, refunds, and canceling a subscription.",
         source: read("content/terms-of-sale.md"),
       }),
     },

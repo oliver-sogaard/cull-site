@@ -16,8 +16,7 @@ node serve.mjs          # look at docs/ on http://127.0.0.1:8188/
   the app repository and run `--sync`. `terms-of-sale.md` lives here.
 - `pages/*.html` — page bodies written by hand (home, formats, install, support, press).
 - `assets/` — the stylesheet (the app's tokens), fonts, icon, screenshots.
-- `build.mjs` `config` — version shown on the download buttons, the
-  downloads address, the support email (empty until one exists).
+- `build.mjs` `config` — the downloads address and the support email.
 
 ## The store
 
@@ -34,8 +33,8 @@ but its own script, under a `<meta>` content security policy.
 
 The thank-you page links the installers by the fixed names every release
 carries (`CULL-setup.exe`, `CULL.dmg`), so its links hold across versions.
-`config.version` is only the number shown on the home page: set it and `--sync` after
-a release, which also brings the changelog up to date.
+After a release, run `--sync` to bring the changelog up to date. Set `CULL_APP`
+to sync from an app checkout somewhere other than `../cull`.
 
 Going live: the license service first (see its README), then `env: "live"`
 with the live token and price ids here.

@@ -165,7 +165,7 @@
       problem.hidden = true;
       if (!email) return;
       if (!token) {
-        problem.textContent = "Tick the check above first. If it does not appear, reload the page.";
+        problem.textContent = "Tick the check above first. If it doesn't appear, reload the page.";
         problem.hidden = false;
         return;
       }
@@ -181,11 +181,11 @@
           problem.textContent =
             res.status === 429
               ? "Too many tries. Wait a minute, then try again."
-              : "That did not go through. Reload the page and try again.";
+              : "That didn't go through. Reload the page and try again.";
           problem.hidden = false;
         })
         .catch(function () {
-          problem.textContent = "The license service could not be reached. Try again in a minute.";
+          problem.textContent = "The license service couldn't be reached. Try again in a minute.";
           problem.hidden = false;
         })
         .then(function () {
