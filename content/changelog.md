@@ -1,5 +1,17 @@
 # What's new
 
+## 2.13.1 · 2026-10-15
+
+- A sidecar left behind by a frame that was deleted mid-session is no longer paired with a same-named frame from another folder on Copy keeps or Move rejects; it stays where it is, and the batch says so.
+- A DNG that is still being copied is never written into: a file that ends before what it declares is retried, with a last try half a minute later, and the verdict lands once the copy is done. A file that stays short for 20 seconds is incomplete and is shown as such; it never holds Finish.
+- Running Copy keeps again after an interrupted run brings the sidecar the first run missed.
+- Undo and redo land in the view the verdict was given in, grid or loupe, through the same path as pressing G or L. A verdict a Lightroom label blocks is taken back from wherever it sits in the undo history; a Compare decision taken back puts the Compare cursor where it was.
+- A Pro lease that runs out while CULL is open is noticed within the half hour, offline too. The license notice on a computer with no machine id says what is true instead of "removed". A license that ended names the day in your own time zone.
+- The unwritable sentence also names a sidecar too large to read safely.
+- Reopening a DNG you edited keeps its grouping signals current.
+- Settings opens its tabs on demand, so the dialog appears sooner; Enter on Add license or Report crash still lands the cursor in the right field.
+- License service: a failed sale can be acknowledged from the admin page, and the nightly erase of ended licenses reads past rows it skips.
+
 ## 2.13.0 · 2026-10-15
 
 - A shoot you reopen groups its bursts and similar sets at once: the signals each frame gave last time are kept, so nothing is read or computed again.
