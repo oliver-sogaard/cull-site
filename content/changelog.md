@@ -1,5 +1,15 @@
 # What's new
 
+## 2.13.2 · 2026-10-16
+
+- Every dialog sits in the middle of the window again, over a dimmed and blurred backdrop: the terms prompt, Settings, Finish, the leave and quit guards, the text sheets. The window's own buttons work above all of them.
+- The key sheet no longer leaves a bright hairline under the title bar.
+- The filmstrip's position bar rides the seam between the strip and the photo, clear of the thumbnails and the burst and similar markers. The scrub speed is named in the status bar only.
+- The filmstrip can be dragged with the mouse.
+- The composition guide and the AF bracket wait for an unzoom to settle, then fade in, instead of appearing mid-glide at the wrong size.
+- The info rail lists a frame's burst and similar-set position as two rows under Frame, not two sections.
+- The privacy policy no longer names one country's supervisory authority.
+
 ## 2.13.1 · 2026-10-15
 
 - A sidecar left behind by a frame that was deleted mid-session is no longer paired with a same-named frame from another folder on Copy keeps or Move rejects; it stays where it is, and the batch says so.

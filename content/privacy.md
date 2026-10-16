@@ -40,7 +40,7 @@ Cloudflare, GitHub, Resend and Paddle may handle this data in the United States 
 
 You can see what CULL keeps: Settings → Storage opens the log folder, and a report is saved as a readable file. You can delete the data folder at any time; the app then starts as new. If you have sent a report and want it deleted, write to support@cull.photography, and it will be removed.
 
-Under the GDPR, and similar laws elsewhere, you can ask for a copy of the personal data held about you, have it corrected or deleted, restrict or object to its use, and receive it in a portable form: write to support@cull.photography. You can also complain to the data protection authority where you live; in Denmark that is Datatilsynet (datatilsynet.dk).
+Under the GDPR, and similar laws elsewhere, you can ask for a copy of the personal data held about you, have it corrected or deleted, restrict or object to its use, and receive it in a portable form: write to support@cull.photography. You can also complain to the data protection authority where you live.
 
 ## Do Not Track and children
 
