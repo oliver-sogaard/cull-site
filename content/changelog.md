@@ -1,5 +1,14 @@
 # What's new
 
+## 2.13.3 · 2026-10-18
+
+- Save status lives in the title bar only: the pill that says saving, unsaved, photos missing or can't be saved shows while culling too, before the cull's other chips, and the footer carries no warnings.
+- The Finish dialog's warning icon keeps its size beside a long sentence; it used to shrink to a dot.
+- A home or staged screen taller than the window scrolls instead of losing its bottom: the update chip, the Pro card and a long folder list stay reachable on a short window. The key sheet does the same.
+- The cull's warning chips shorten with an ellipsis when all of them show at once, instead of running under the window's buttons.
+- A begin the service refuses over the Free cap shows the cap block, with Add license and Get CULL Pro, never a boxed error with the same sentence.
+- Hover tips and the hint pill cast a lighter shadow.
+
 ## 2.13.2 · 2026-10-16
 
 - Every dialog sits in the middle of the window again, over a dimmed and blurred backdrop: the terms prompt, Settings, Finish, the leave and quit guards, the text sheets. The window's own buttons work above all of them.
