@@ -1,5 +1,11 @@
 # What's new
 
+## 2.14.0 · 2026-10-19
+
+- A cull is always in the order the frames were taken. The "Sort by capture time" toggle is gone from the staged screen: it was on for everyone, and a toggle nobody turns off is only a question.
+- Two or more folders staged now show a folder table: each folder's frame count, its first frame's time, and a Camera clock field. A body whose clock was off gets its correction typed, as −1 h or +2 min 30 s or 1:05:00, instead of clicked a second at a time; the − and + beside it still nudge by a second, a minute with Shift. The first-frame column shows each folder as corrected, so a right correction visibly brings two bodies together.
+- With one folder staged, nothing about clocks is shown at all.
+
 ## 2.13.3 · 2026-10-18
 
 - Save status lives in the title bar only: the pill that says saving, unsaved, photos missing or can't be saved shows while culling too, before the cull's other chips, and the footer carries no warnings.
