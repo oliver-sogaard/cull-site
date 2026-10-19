@@ -1,5 +1,9 @@
 # What's new
 
+## 2.14.1 · 2026-10-19
+
+- The camera-clock correction is gone: the folder table, the typed field and the stored per-folder corrections. A professional's bodies keep time, and the few that don't are not worth a control on everyone's screen. The staged screen is the count, what the last batch added, and Begin, however many folders are staged. The cull still interleaves them by the time each frame was taken.
+
 ## 2.14.0 · 2026-10-19
 
 - A cull is always in the order the frames were taken. The "Sort by capture time" toggle is gone from the staged screen: it was on for everyone, and a toggle nobody turns off is only a question.
