@@ -100,8 +100,8 @@
   function decideTo(n, waiting) {
     want = n;
     n = Math.max(0, Math.min(cells.length, n));
-    while (decided < n) { const c = cells[decided]; c.classList.add('d', c.dataset.v); if (c.dataset.v === 'f') favs++; if (c.dataset.v === 'k') keeps++; decided++; }
-    while (decided > n) { decided--; const c = cells[decided]; c.classList.remove('d', c.dataset.v); if (c.dataset.v === 'f') favs--; if (c.dataset.v === 'k') keeps--; }
+    while (decided < n) { const c = cells[decided]; c.classList.add('d', c.dataset.v); if (c.dataset.v === 'r') setTimeout(() => { if (c.classList.contains('d')) c.classList.add('dimmed'); }, 720); if (c.dataset.v === 'f') favs++; if (c.dataset.v === 'k') keeps++; decided++; }
+    while (decided > n) { decided--; const c = cells[decided]; c.classList.remove('d', c.dataset.v, 'dimmed'); if (c.dataset.v === 'r') { c.classList.add('undim'); setTimeout(() => c.classList.remove('undim'), 720); } if (c.dataset.v === 'f') favs--; if (c.dataset.v === 'k') keeps--; }
     // the cursor sits on the next undecided frame; done = the last frame
     const nc = Math.min(decided, cells.length - 1);
     if (nc !== cur) { if (cur >= 0) cells[cur].classList.remove('cur', 'wait'); cells[nc].classList.add('cur'); cur = nc; }
@@ -125,7 +125,7 @@
   }
   const lerp = (a, b, t) => a + (b - a) * t;
   const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-  let lastP = 0, scrolled = false;
+  let lastP = 0, scrolled = false, unclearT = 0;
   function render(p) {
     lastP = p;
     const sweep = Math.min(1, Math.max(0, (p - 0.04) / 0.52));
@@ -133,6 +133,7 @@
     const grow = Math.min(1, Math.max(0, (p - 0.60) / 0.27));
     decideTo(Math.round(sweep * cells.length), !scrolled && sweep === 0);
     invite.classList.toggle('off', p > 0.02);
+    if (sheet.classList.contains('clear') && clear === 0) { sheet.classList.add('unclear'); clearTimeout(unclearT); unclearT = setTimeout(() => sheet.classList.remove('unclear'), 620); }
     sheet.classList.toggle('clear', clear > 0);
     sheet.classList.toggle('gone', grow > 0.06);
     stage.classList.toggle('done', p > 0.84);

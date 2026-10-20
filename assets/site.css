@@ -49,7 +49,18 @@ img { display: block; max-width: 100%; height: auto; }
 .cell { position: absolute; width: var(--cellw); height: var(--cellw); transition: opacity 520ms cubic-bezier(.2,.7,.2,1), transform 620ms cubic-bezier(.2,.7,.2,1); }
 .cell .frame { position: absolute; inset: var(--pad); border-radius: 2px; background-color: var(--matte); background-image: var(--sheet); background-repeat: no-repeat; background-size: var(--sprite); outline: var(--ol) solid transparent; outline-offset: 2px; }
 /* a touch device: the fade runs while the page scrolls, which Safari keeps smooth only for cells already on the compositor */
-@media (pointer: coarse) { .cell { will-change: opacity, transform; transition-duration: 760ms, 860ms; } }
+@media (pointer: coarse) {
+  .cell { will-change: opacity, transform; transition: none; }
+  .cell.d.r { animation: dim 700ms ease forwards; }
+  .cell.undim { animation: undim 700ms ease; }
+  .cell.d.r.dimmed { animation: none; opacity: 0.5; } /* settled: a later vanish and reappear must not restart the dim */
+  .sheet.clear .cell.r { animation: vanish 600ms ease forwards; }
+  .sheet.unclear .cell.r { animation: reappear 600ms ease; }
+}
+@keyframes dim { from { opacity: 1; } to { opacity: 0.5; } }
+@keyframes undim { from { opacity: 0.5; } to { opacity: 1; } }
+@keyframes vanish { from { opacity: 0.5; transform: none; } to { opacity: 0; transform: scale(0.8); } }
+@keyframes reappear { from { opacity: 0; transform: scale(0.8); } to { opacity: 0.5; transform: none; } }
 .cell.cur { z-index: 3; }
 .cell.cur .frame { outline-color: var(--accent); }
 .cell.cur.wait .frame { animation: pulse 1.4s ease-in-out infinite; }
