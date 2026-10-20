@@ -35,13 +35,13 @@ export const config = {
    * live in the license service (the cull-api Worker), never here.
    */
   store: {
-    env: "sandbox",
+    env: "live",
     apiUrl: "https://api.cull.photography",
-    clientToken: "test_5333af6d0cf1e18adcc770b273b",
+    clientToken: "live_75c26e26ca0766ef8d9dc59b61b",
     prices: {
-      monthly: "pri_01m44bw9kvenpc3gpqxspy91w4",
-      yearly: "pri_01m44bxtqtq5rkce9hncd0q35x",
-      lifetime: "pri_01m44bz2q9s6xw3rc5x17eyk43",
+      monthly: "pri_01m44rk0ctthtjsab1ckhy1f12",
+      yearly: "pri_01m44rm72m3rx3v72tx345vykz",
+      lifetime: "pri_01m44rmxqy4zmkxvbpvtxq64wt",
     },
     /** Cloudflare Turnstile (widget cull-lost-key). Empty: the lost-key page says "write to support". */
     turnstileSiteKey: "0x4AAAAAAFNzi3zLR0LghzKn",
