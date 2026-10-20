@@ -1,6 +1,6 @@
 # Privacy policy
 
-Version 4 · effective with CULL 2.13.0, October 2026
+Version 1 · effective with CULL 1.0.0, October 2026
 
 This policy is written in plain language.
 
