@@ -334,8 +334,9 @@ function sync() {
 }
 
 function build() {
-  fs.rmSync(out, { recursive: true, force: true });
+  // Empty the folder rather than remove it: a shell or server sitting in it would refuse the removal.
   fs.mkdirSync(out, { recursive: true });
+  for (const f of fs.readdirSync(out)) fs.rmSync(path.join(out, f), { recursive: true, force: true });
   copyDir(path.join(here, "assets"), path.join(out, "assets"));
   // The hero sprites are referenced from the stylesheet without a query; a sprite whose rows
   // change must never be drawn from a cached copy, so the built stylesheet names them by content.

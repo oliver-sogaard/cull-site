@@ -47,7 +47,7 @@ img { display: block; max-width: 100%; height: auto; }
 .sheet { position: absolute; }
 /* the cell: a square of --cellw with a --pad corridor on every side (the app's 9 px at a 168 px cell) */
 .cell { position: absolute; width: var(--cellw); height: var(--cellw); transition: opacity 520ms cubic-bezier(.2,.7,.2,1), transform 620ms cubic-bezier(.2,.7,.2,1); }
-.cell .frame { position: absolute; inset: var(--pad); border-radius: 2px; background-color: var(--matte); background-image: var(--sheet); background-repeat: no-repeat; background-size: var(--sprite); outline: var(--ol) solid transparent; outline-offset: 2px; }
+.cell .frame { position: absolute; top: var(--pad); right: var(--pad); bottom: var(--pad); left: var(--pad); inset: var(--pad); border-radius: 2px; background-color: var(--matte); background-image: var(--sheet); background-repeat: no-repeat; background-size: var(--sprite); outline: var(--ol) solid transparent; outline-offset: 2px; }
 /* a touch device: the fade runs while the page scrolls, which Safari keeps smooth only for cells already on the compositor */
 @media (pointer: coarse) {
   .cell { will-change: opacity, transform; transition: none; }
@@ -107,7 +107,7 @@ img { display: block; max-width: 100%; height: auto; }
 
 .photo { position: absolute; left: 0; top: 0; transform-origin: 0 0; opacity: 0; z-index: 7; border-radius: 6px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,.7); will-change: transform, opacity; }
 .photo img { width: 100%; height: 100%; object-fit: cover; }
-.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,7,8,.88) 0%, rgba(7,7,8,.45) 32%, rgba(7,7,8,0) 58%); opacity: 0; transition: opacity 500ms ease; }
+.photo::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; inset: 0; background: linear-gradient(to top, rgba(7,7,8,.88) 0%, rgba(7,7,8,.45) 32%, rgba(7,7,8,0) 58%); opacity: 0; transition: opacity 500ms ease; }
 .stage.done .photo::after { opacity: 1; }
 .claim { position: absolute; left: var(--gutter); right: var(--gutter-r); bottom: 0; z-index: 8; opacity: 0; transform: translateY(16px); transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1); padding-bottom: calc(40px + var(--barroom)); }
 .stage.done .claim { opacity: 1; transform: none; }
@@ -147,7 +147,7 @@ figure.app figcaption b { font-weight: 500; color: var(--ink-2); }
 .kbd { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; height: 22px; min-width: 22px; padding: 0 6px; background: #1d1d22; border: 1px solid #28282e; border-radius: 3px; color: #a3a3aa; font-family: var(--mono); font-size: 11px; line-height: 1; letter-spacing: 0.04em; }
 .kbd.acc { color: var(--accent); border-color: rgba(212,175,106,0.45); }
 /* hold Space: the real loupe, then the real loupe at 100 % while the key is down */
-.hold .shot img.z { position: absolute; inset: 0; opacity: 0; transition: opacity 120ms ease; }
+.hold .shot img.z { position: absolute; top: 0; right: 0; bottom: 0; left: 0; inset: 0; opacity: 0; transition: opacity 120ms ease; }
 .hold.is-held .shot img.z { opacity: 1; }
 .hold .shot img.z, .hold .shot picture img { width: 100%; height: auto; }
 .holdbtn { display: inline-flex; align-items: center; gap: 12px; margin-top: 26px; padding: 10px 16px 10px 12px; border-radius: 999px; border: 1px solid var(--edge); background: var(--panel); color: var(--ink-2); font: 500 13px/1 var(--body); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: none; transition: border-color 160ms ease, color 160ms ease; }
