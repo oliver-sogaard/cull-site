@@ -46,6 +46,9 @@
   // every line is in the document from the start (so the box keeps its height); each one fades and settles in on its turn, the caret riding the newest
   pre.innerHTML = lines.map((l) => '<span class="ln">' + l + '</span>').join('') + '<span class="caret"></span>';
   const lns = [...pre.querySelectorAll('.ln')], caret = pre.querySelector('.caret');
+  // the longest line sets the type size on a narrow screen, so the file never scrolls sideways
+  const fit = () => { pre.style.fontSize = ''; const w = pre.scrollWidth, c = pre.clientWidth; if (w > c) pre.style.fontSize = Math.max(7.5, parseFloat(getComputedStyle(pre).fontSize) * c / w) + 'px'; };
+  fit(); addEventListener('resize', fit);
   if (reduce || !('IntersectionObserver' in window)) { lns.forEach((l) => l.classList.add('in')); return; }
   let started = false;
   const io2 = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting) && !started) { started = true; io2.disconnect(); type(); } }, { threshold: 0.4 });
