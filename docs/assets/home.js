@@ -43,9 +43,16 @@
     '&lt;?xpacket end="w"?&gt;',
   ];
   const pre = document.getElementById('xmptext');
-  if (reduce || !('IntersectionObserver' in window)) { pre.innerHTML = lines.join('\n'); return; }
+  // every line is in the document from the start (so the box keeps its height); each one fades and settles in on its turn, the caret riding the newest
+  pre.innerHTML = lines.map((l) => '<span class="ln">' + l + '</span>').join('') + '<span class="caret"></span>';
+  const lns = [...pre.querySelectorAll('.ln')], caret = pre.querySelector('.caret');
+  if (reduce || !('IntersectionObserver' in window)) { lns.forEach((l) => l.classList.add('in')); return; }
   let started = false;
   const io2 = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting) && !started) { started = true; io2.disconnect(); type(); } }, { threshold: 0.4 });
   io2.observe(pre);
-  function type() { let i = 0; const step = () => { i++; pre.innerHTML = lines.slice(0, i).join('\n') + (i < lines.length ? '<span class="caret"></span>' : ''); if (i < lines.length) setTimeout(step, i >= 6 && i <= 10 ? 260 : 90); }; step(); }
+  function type() {
+    let i = 0; caret.classList.add('on');
+    const step = () => { lns[i].classList.add('in'); lns[i].after(caret); i++; if (i < lns.length) setTimeout(step, i >= 6 && i <= 10 ? 340 : 130); else setTimeout(() => caret.classList.remove('on'), 900); };
+    setTimeout(step, 240);
+  }
 })();
