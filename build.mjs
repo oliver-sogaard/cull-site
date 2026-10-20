@@ -185,8 +185,8 @@ function homePage(read) {
       "CULL is the step before Lightroom: open the folder, judge each frame with one key, and the verdicts are already there when you import. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG. Windows and Mac.",
     body,
     head: [
-      `<link rel="preload" as="image" href="./assets/site/sheet-desk.jpg" media="(min-width: 761px)">`,
-      `<link rel="preload" as="image" href="./assets/site/sheet-phone.jpg" media="(max-width: 760px)">`,
+      `<link rel="preload" as="image" href="${asset("site/sheet-desk.jpg")}" media="(min-width: 761px)">`,
+      `<link rel="preload" as="image" href="${asset("site/sheet-phone.jpg")}" media="(max-width: 760px)">`,
     ].join("\n"),
     scripts: [`<script src="${asset("hero.js")}"></script>`, `<script src="${asset("home.js")}"></script>`],
   });
@@ -336,6 +336,15 @@ function build() {
   fs.rmSync(out, { recursive: true, force: true });
   fs.mkdirSync(out, { recursive: true });
   copyDir(path.join(here, "assets"), path.join(out, "assets"));
+  // The hero sprites are referenced from the stylesheet without a query; a sprite whose rows
+  // change must never be drawn from a cached copy, so the built stylesheet names them by content.
+  const cssOut = path.join(out, "assets", "site.css");
+  fs.writeFileSync(
+    cssOut,
+    fs.readFileSync(cssOut, "utf8")
+      .replaceAll("url(./site/sheet-desk.jpg)", `url(./site/sheet-desk.jpg?v=${assetHash("site/sheet-desk.jpg")})`)
+      .replaceAll("url(./site/sheet-phone.jpg)", `url(./site/sheet-phone.jpg?v=${assetHash("site/sheet-phone.jpg")})`),
+  );
   // GitHub Pages reads the custom domain from this file in the published
   // folder; the build empties that folder, so it writes the file again.
   fs.writeFileSync(path.join(out, "CNAME"), "cull.photography\n");

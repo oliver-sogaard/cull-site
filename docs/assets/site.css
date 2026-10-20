@@ -11,7 +11,7 @@
   --app-bg: #0c0c0d; --matte: #1a1a1e;
   --display: "Fraunces", Georgia, serif; --body: "Inter", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
   --gutter: max(24px, env(safe-area-inset-left, 0px)); --gutter-r: max(24px, env(safe-area-inset-right, 0px));
-  --sheet: url(./site/sheet-desk.jpg);
+  --sheet: url(./site/sheet-desk.jpg?v=a6455db452);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -99,7 +99,7 @@ h1 em { font-style: italic; color: var(--accent); white-space: nowrap; }
 .claim .acts .quiet { font-size: 13px; }
 .claim .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-shadow: 0 1px 12px rgba(0,0,0,.6); margin-bottom: 18px; }
 @media (max-width: 760px) {
-  :root { --sheet: url(./site/sheet-phone.jpg); }
+  :root { --sheet: url(./site/sheet-phone.jpg?v=9a9d91ca76); }
   .rail .lab, .burst .lab { display: none; }
   .cell .frame { border-radius: 1px; }
   .photo { border-radius: 0; box-shadow: none; } .claim { padding-bottom: 28px; }
