@@ -55,7 +55,7 @@
   io2.observe(pre);
   function type() {
     let i = 0; caret.classList.add('on');
-    const step = () => { lns[i].classList.add('in'); lns[i].after(caret); i++; if (i < lns.length) setTimeout(step, i >= 6 && i <= 10 ? 340 : 130); else setTimeout(() => caret.classList.remove('on'), 900); };
-    setTimeout(step, 240);
+    const step = () => { lns[i].classList.add('in'); if (i >= 6 && i <= 10) lns[i].classList.add('hot'); lns[i].after(caret); i++; if (i < lns.length) setTimeout(step, i >= 6 && i <= 10 ? 190 : 60); else setTimeout(() => caret.classList.remove('on'), 700); };
+    setTimeout(step, 120);
   }
 })();

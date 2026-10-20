@@ -106,15 +106,18 @@ button.btn { border: 0; font-family: var(--body); cursor: pointer; }
 
 /* press */
 .press-icon img { width: 96px; height: 96px; border-radius: 22px; }
-.shots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
-.shots figure { margin: 0; }
-.shots img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--edge); }
-.shots figcaption { margin-top: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+/* press: the three shots as the home page shows the app, full width, one under the other */
+.press-shots { max-width: none; }
+.press-shots figure.app { margin-top: 26px; }
+.press-shots figure.app + figure.app { margin-top: 44px; }
+.press-shots a.shot { display: block; }
+.press-shots figcaption a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); }
+.press-shots figcaption a:hover { color: var(--ink); text-decoration-color: var(--accent); }
 
 @media (max-width: 760px) {
   .page { padding-top: 104px; padding-bottom: 72px; }
   .sub { margin-top: 52px; }
-  .downloads, .dialogs, .buy, .shots { grid-template-columns: 1fr; }
+  .downloads, .dialogs, .buy { grid-template-columns: 1fr; }
   .formats-list { grid-template-columns: 1fr; gap: 4px 0; }
   .formats-list dd { margin-bottom: 12px; }
   .lost { grid-template-columns: 1fr; }
