@@ -58,7 +58,7 @@ img { display: block; max-width: 100%; height: auto; }
 .rail .lab { position: absolute; left: 0; top: -4px; padding: 0 4px; background: var(--bg); font-family: var(--mono); font-size: 8px; line-height: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--cool); white-space: nowrap; }
 /* a burst: one hairline box round the run, 4 px of air from the photos, its count riding the top-left of the line (strip.css .cull-burst-box) */
 .burst { position: absolute; box-sizing: border-box; border: var(--bw) solid rgba(214,178,120,0.5); border-radius: var(--br); z-index: 3; pointer-events: none; transition: opacity 500ms ease; }
-.burst .lab { position: absolute; left: var(--bl); top: -5px; padding: 0 4px; background: var(--bg); font-family: var(--mono); font-size: 8px; line-height: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+.burst .lab { position: absolute; left: var(--bl); top: -6px; padding: 0 4px; background: var(--bg); font-family: var(--mono); font-size: 8px; line-height: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
 .sheet.clear .burst { opacity: 0; }
 .sheet.clear .cell.r { opacity: 0; transform: scale(0.8); }
 .sheet.gone .cell.k, .sheet.gone .cell.f:not(.hero-src) { opacity: 0.42; }

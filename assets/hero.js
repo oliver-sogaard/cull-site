@@ -24,13 +24,13 @@
     let cellW = p ? Math.max(40, Math.floor(W / 8)) : Math.min(80, Math.max(56, Math.round(W / 24)));
     let s, pad, lane, rowH, cols, rows;
     const measure = () => {
-      s = cellW / APP.cell; pad = Math.max(2, Math.round(APP.pad * s)); lane = Math.max(p ? 6 : 14, Math.round(APP.lane * s)); rowH = cellW + lane;
+      s = cellW / APP.cell; pad = Math.max(2, Math.round(APP.pad * s)); lane = Math.max(p ? 6 : 15, Math.round(APP.lane * s)); rowH = cellW + lane;
       cols = Math.ceil(W / cellW); rows = Math.ceil(H / rowH) + 1;
     };
     measure();
     while (cols * rows > seq.length && cellW < 400) { cellW += 4; measure(); }
     const dot = Math.max(7, Math.round(APP.dot * s)), dotoff = Math.max(1, Math.round(APP.dotoff * s)), ol = Math.max(1.5, Math.round(APP.outline * s * 2) / 2), rail = Math.max(2, Math.round(APP.rail * s));
-    const box = Math.max(1, Math.round(APP.box * s)), lift = Math.max(2, Math.round(APP.lift * s)), bw = s < 0.6 ? 1 : 2, br = Math.max(2, Math.round(APP.radius * s));
+    const box = Math.max(1, Math.round(APP.box * s)), lift = Math.max(2, Math.round(APP.lift * s)), bw = 2, br = Math.max(2, Math.round(APP.radius * s));
     const totalRows = Math.ceil(seq.length / cols), heroRow = Math.floor(HERO_IDX / cols);
     const r0 = Math.min(Math.max(0, heroRow - Math.floor(rows * 0.42)), Math.max(0, totalRows - rows));
     first = r0 * cols;
