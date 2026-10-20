@@ -97,6 +97,11 @@ h1 em { font-style: italic; color: var(--accent); white-space: nowrap; }
 .claim p { margin: 0; max-width: 52ch; font-size: 17px; color: var(--ink-2); }
 .claim .acts { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-top: 26px; }
 .claim .acts .quiet { font-size: 13px; }
+/* a phone cannot run CULL: no installer button, a line instead (assets/os.js marks <html data-os>) */
+.onphone { display: none; font-size: 13px; color: var(--ink-2); }
+html[data-os="phone"] .claim .acts .btn, html[data-os="phone"] .claim .acts .quiet { display: none; }
+html[data-os="phone"] .onphone { display: block; }
+html[data-os="phone"] .pill a.dl { display: none; }
 .claim .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-shadow: 0 1px 12px rgba(0,0,0,.6); margin-bottom: 18px; }
 @media (max-width: 760px) {
   :root { --sheet: url(./site/sheet-phone.jpg?v=9a9d91ca76); }

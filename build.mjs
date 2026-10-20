@@ -149,7 +149,8 @@ export function layout({ slug, title, description, body, home = false, head = ""
 <meta name="robots" content="noindex">
 <link rel="icon" href="./assets/icon-64.png">
 <link rel="stylesheet" href="${asset("site.css")}">
-<link rel="stylesheet" href="${asset("pages.css")}">${head ? `\n${head}` : ""}
+<link rel="stylesheet" href="${asset("pages.css")}">
+<script src="${asset("os.js")}"></script>${head ? `\n${head}` : ""}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>${store && config.store.env === "sandbox" ? `\n<div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>` : ""}
 <nav class="nav" aria-label="Site"><div class="pill glass"><a class="brand" href="./">CULL</a>${navPill(slug)}</div></nav>

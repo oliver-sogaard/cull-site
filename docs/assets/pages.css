@@ -36,6 +36,13 @@
 .dlcard__os { font-family: var(--display); font-weight: 300; font-variation-settings: "opsz" 60; font-size: 30px; line-height: 1; color: var(--ink); }
 .dlcard__file { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--accent); margin-top: 8px; }
 .dlcard__note { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+/* the visitor's own system first; on a phone the plates are dimmed and a line says why (assets/os.js) */
+html[data-os="mac"] .dlcard--mac { order: -1; }
+html[data-os="windows"] .dlcard--windows { border-color: rgba(212,175,106,0.5); }
+html[data-os="mac"] .dlcard--mac { border-color: rgba(212,175,106,0.5); }
+.page .onphone { display: none; margin-bottom: 26px; }
+html[data-os="phone"] .page .onphone { display: block; }
+html[data-os="phone"] .downloads { opacity: 0.4; pointer-events: none; }
 .dialogs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 18px 0 22px; }
 .plate { margin: 0; }
 .plate img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--edge); }
