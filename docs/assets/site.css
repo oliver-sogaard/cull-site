@@ -44,7 +44,6 @@ img { display: block; max-width: 100%; height: auto; }
 .stage { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; background: var(--bg); }
 /* bottom-anchored pieces sit above the small viewport's edge, i.e. above the bar when it shows, and keep that place when it goes */
 :root { --barroom: 0px; }
-@supports (height: 100lvh) { :root { --barroom: calc(100lvh - 100svh); } }
 .sheet { position: absolute; }
 /* the cell: a square of --cellw with a --pad corridor on every side (the app's 9 px at a 168 px cell) */
 .cell { position: absolute; width: var(--cellw); height: var(--cellw); transition: opacity 520ms cubic-bezier(.2,.7,.2,1), transform 620ms cubic-bezier(.2,.7,.2,1); }

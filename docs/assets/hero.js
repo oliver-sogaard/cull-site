@@ -12,6 +12,11 @@
   const APP = { cell: 168, pad: 9, lane: 16, dot: 18, dotoff: 6, outline: 3, rail: 6, box: 2, lift: 4, radius: 4 };
   const GLYPH = { k: '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>', r: '<svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>', f: '<svg viewBox="0 0 24 24"><path d="M11.5 2.6a.56.56 0 0 1 1 0l2.6 5.5 6 .8a.56.56 0 0 1 .3.95l-4.4 4.2 1.1 6a.56.56 0 0 1-.8.6L12 17.8l-5.4 2.9a.56.56 0 0 1-.8-.6l1.1-6L2.5 9.9a.56.56 0 0 1 .3-.95l6-.8z"/></svg>' };
   const phone = () => matchMedia('(max-width: 760px)').matches;
+  // a touch device: the browser's bar slides in and out and some browsers resize the whole view with it.
+  // The hero is measured once, with the bar showing, and pinned in pixels: nothing moves when the bar does.
+  const touch = matchMedia('(pointer: coarse)').matches, claim = document.querySelector('.claim');
+  const BAR = 170; // more than any bar: the stage runs this far below the screen's bottom edge
+  let Hs = 0;
   const fmt = (n) => n.toLocaleString('en-US');
 
   let cells = [], first = 0, geom = null, heroCell = null, stars = [];
@@ -20,6 +25,13 @@
   // the grid at this stage size: small cells edge to edge, as many of the app's rows as cover the screen, the favorite among them
   function build() {
     const p = phone();
+    if (touch) {
+      Hs = Hs ? Math.min(Hs, innerHeight) : innerHeight;
+      stage.style.height = Hs + BAR + 'px';
+      section.style.height = Math.round(4.2 * Hs) + 'px';
+      invite.style.bottom = 'auto'; invite.style.top = Hs - 34 - invite.offsetHeight + 'px';
+      claim.style.bottom = 'auto'; claim.style.top = Hs - claim.offsetHeight + 'px';
+    }
     const W = stage.clientWidth, H = stage.clientHeight;
     let cellW = p ? Math.max(40, Math.floor(W / 8)) : Math.min(80, Math.max(56, Math.round(W / 24)));
     let s, pad, lane, rowH, cols, rows;
@@ -141,7 +153,6 @@
   function onScroll() { const r = section.getBoundingClientRect(); target = Math.min(1, Math.max(0, -r.top / (r.height - stage.offsetHeight))); if (target > 0.005) scrolled = true; if (!animating) { animating = true; lastT = performance.now(); requestAnimationFrame(tick); } }
   function tick(now) { const dt = Math.min(64, now - lastT); lastT = now; const d = target - lastP; if (Math.abs(d) < 0.0003) { render(target); animating = false; return; } render(lastP + d * (1 - Math.exp(-dt / 90))); requestAnimationFrame(tick); }
   let lastW = innerWidth, lastH = innerHeight, rt = 0;
-  const touch = matchMedia('(pointer: coarse)').matches;
   addEventListener('resize', () => { if (innerWidth === lastW && (touch || Math.abs(innerHeight - lastH) < 80)) return; lastW = innerWidth; lastH = innerHeight; clearTimeout(rt); rt = setTimeout(build, 120); });
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) { section.style.height = '100vh'; invite.classList.add('off'); scrolled = true; build(); render(1); }
   else {
