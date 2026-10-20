@@ -32,6 +32,10 @@ img { display: block; max-width: 100%; height: auto; }
 .pill a.link:hover { color: var(--ink); background: rgba(255,255,255,0.05); }
 .pill a.pro { font-size: 13px; color: var(--accent-ink); background: var(--accent); padding: 7px 14px; border-radius: 999px; font-weight: 500; margin-left: 6px; transition: background 160ms ease; }
 .pill a.pro:hover { background: #e8c182; }
+/* the page you are on: lit, on a faint pill; the brand when on the home page */
+.pill a.link[aria-current="page"], .pill a.brand[aria-current="page"] { color: var(--ink); background: rgba(255,255,255,0.07); border-radius: 999px; }
+.pill a.brand[aria-current="page"] { color: var(--accent); padding: 7px 12px; margin-left: -12px; margin-right: 6px; }
+.pill a.pro[aria-current="page"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px rgba(212,175,106,0.55); }
 @media (max-width: 760px) { .pill a.link:not(.dl) { display: none; } }
 
 /* ── the cull: the app's grid, one measure at a time ── */
@@ -101,7 +105,6 @@ h1 em { font-style: italic; color: var(--accent); white-space: nowrap; }
 .onphone { display: none; font-size: 13px; color: var(--ink-2); }
 html[data-os="phone"] .claim .acts .btn, html[data-os="phone"] .claim .acts .quiet { display: none; }
 html[data-os="phone"] .onphone { display: block; }
-html[data-os="phone"] .pill a.dl { display: none; }
 .claim .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-shadow: 0 1px 12px rgba(0,0,0,.6); margin-bottom: 18px; }
 @media (max-width: 760px) {
   :root { --sheet: url(./site/sheet-phone.jpg); }

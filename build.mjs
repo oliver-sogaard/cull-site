@@ -153,7 +153,7 @@ export function layout({ slug, title, description, body, home = false, head = ""
 <script src="${asset("os.js")}"></script>${head ? `\n${head}` : ""}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ""}>${store && config.store.env === "sandbox" ? `\n<div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>` : ""}
-<nav class="nav" aria-label="Site"><div class="pill glass"><a class="brand" href="./">CULL</a>${navPill(slug)}</div></nav>
+<nav class="nav" aria-label="Site"><div class="pill glass"><a class="brand" href="./"${slug === "index" ? ' aria-current="page"' : ""}>CULL</a>${navPill(slug)}</div></nav>
 <main id="top"${home ? "" : ' class="wrap page"'}>
 ${home ? body : `<div class="inner">\n${body}\n</div>`}
 </main>
