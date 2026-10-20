@@ -14,8 +14,14 @@ node serve.mjs          # look at docs/ on http://127.0.0.1:8188/
   `build.mjs` (headings, paragraphs, lists, bold, links). `changelog.md`,
   `privacy.md` and `terms.md` are copies of the app's files: change them in
   the app repository and run `--sync`. `terms-of-sale.md` lives here.
-- `pages/*.html` — page bodies written by hand (home, formats, install, support, press).
-- `assets/` — the stylesheet (the app's tokens), fonts, icon, screenshots.
+- `pages/*.html` — page bodies written by hand (home, formats, install, support, press, the store).
+  `home.html` is the hero page: the app's own grid on 596 frames of a real shoot, culled by
+  scroll (`assets/hero.js`), then the app on real frames. Its data is `content/hero/*.json`
+  (frame numbers, verdicts, positions; the similar sets and bursts the app's own rules find)
+  and its sprites `assets/site/sheet-*.jpg`; both come from the mockup workshop
+  (`mockup/`, not committed) — see `mockup/MANIFEST.md` there for how they are made.
+- `assets/` — `site.css` (the design: Fraunces, Inter, JetBrains Mono, self-hosted) and
+  `pages.css` (the other pages), the scripts, fonts, icon, the app screenshots in `app/`.
 - `build.mjs` `config` — the downloads address and the support email.
 
 ## The store

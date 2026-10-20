@@ -1,64 +1,49 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formats — CULL</title>
-    <meta name="description" content="Which RAW formats CULL opens, and what each one gives: full-size zoom, the AF point, and burst grouping, measured body by body." />
-    <!-- Not released: removed on launch day. -->
-    <meta name="robots" content="noindex" />
-    <link rel="icon" href="./assets/icon-64.png" />
-    <link rel="stylesheet" href="./assets/site.css" />
-    <link rel="stylesheet" href="./assets/pages.css" />
-  </head>
-  <body>
-    <header class="nav">
-      <div class="wrap nav__row">
-        <a class="nav__brand" href="./">CULL</a>
-        <nav class="nav__links" aria-label="Site">
-          <a href="./formats.html" aria-current="page">Formats</a>
-          <a href="./changelog.html">What's new</a>
-          <a href="./support.html">Support</a>
-          <a href="./pro.html" class="is-cta">Pro</a>
-        </nav>
-      </div>
-    </header>
-    <main class="wrap page">
-      <article class="prose">
-        <h1>Formats</h1>
-        <p class="hero__lead">
-          CULL shows you the preview your camera saved inside each RAW file. Most cameras
-          save one at full size, so zooming in shows every pixel. Some save a smaller one; then
-          the app zooms as far as that preview goes and says so in a small badge.
-        </p>
-        <dl class="formats-list">
-          <dt>Canon</dt><dd>CR3 and CR2. Full-size previews on every camera.</dd>
-          <dt>Nikon</dt><dd>NEF. Full-size previews on every camera.</dd>
-          <dt>Sony</dt><dd>ARW. Cameras from 2021 on save a full-size preview; older ones a smaller one.</dd>
-          <dt>Fujifilm</dt><dd>RAF. Every camera saves a preview at about half size.</dd>
-          <dt>Olympus and OM System</dt><dd>ORF. Every camera saves a 3,200-pixel preview.</dd>
-          <dt>Panasonic and Leica</dt><dd>RW2 and RWL. Cameras from 2022 on save a full-size preview; older ones a smaller one.</dd>
-          <dt>DNG</dt><dd>Whatever wrote the file decides. Cameras that shoot DNG save full size; converters and phones usually save a small one.</dd>
-        </dl>
-        <h2>What is written, and where</h2>
-        <p>
-          A keep is Lightroom's pick flag, a reject its reject flag, and a favorite a pick with
-          a purple label. They go into an XMP sidecar next to the file. A DNG carries its own
-          metadata and Lightroom ignores a sidecar beside one, so there the verdict goes inside
-          the file. The image data is never changed.
-        </p>
-        <h2>Not supported</h2>
-        <p>Pentax PEF, Samsung SRW, Hasselblad 3FR, Sigma X3F and the old Canon CRW. Most of those cameras can also shoot DNG.</p>
-      </article>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Formats · CULL</title>
+<meta name="description" content="Which RAW formats CULL opens, what each one gives, and where a verdict is written.">
+<!-- Not released: removed on launch day. -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="./assets/icon-64.png">
+<link rel="stylesheet" href="./assets/site.css?v=fab6df1256">
+<link rel="stylesheet" href="./assets/pages.css?v=95f49a334f">
+</head>
+<body>
+<nav class="nav" aria-label="Site"><div class="pill glass"><a class="brand" href="./">CULL</a><a class="link" href="./formats.html" aria-current="page">Formats</a><a class="link" href="./changelog.html">What's new</a><a class="link" href="./support.html">Support</a><a class="link dl" href="./install.html">Download</a><a class="pro" href="./pro.html">Pro</a></div></nav>
+<main id="top" class="wrap page">
+<div class="inner">
+<div class="head2"><p class="two">Nine RAW formats, straight from the card. <span class="g">Each frame opens from the preview the camera already wrote.</span></p></div>
+<p class="lead">Most cameras save one at full size, so zooming in shows every pixel. Some save a smaller one; then the app zooms as far as that preview goes and says so in a small badge.</p>
+<div class="formats"><span>CR3<b>Canon</b></span><span>CR2<b>Canon</b></span><span>ARW<b>Sony</b></span><span>NEF<b>Nikon</b></span><span>RAF<b>Fujifilm</b></span><span>ORF<b>Olympus</b></span><span>RW2<b>Panasonic</b></span><span>RWL<b>Leica</b></span><span>DNG<b>Adobe</b></span></div>
 
-    </main>
-    <footer class="footer">
-      <div class="wrap footer__row">
-        <div>
-          <a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
-        </div>
-        <div>© 2026 Oliver Søgaard-Andersen</div>
-      </div>
-    </footer>
-  </body>
+<section class="sub">
+<h2>What each one gives</h2>
+<dl class="formats-list">
+<dt>Canon</dt><dd>CR3 and CR2. Full-size previews on every camera.</dd>
+<dt>Nikon</dt><dd>NEF. Full-size previews on every camera.</dd>
+<dt>Sony</dt><dd>ARW. Cameras from 2021 on save a full-size preview; older ones a smaller one.</dd>
+<dt>Fujifilm</dt><dd>RAF. Every camera saves a preview at about half size.</dd>
+<dt>Olympus and OM System</dt><dd>ORF. Every camera saves a 3,200-pixel preview.</dd>
+<dt>Panasonic and Leica</dt><dd>RW2 and RWL. Cameras from 2022 on save a full-size preview; older ones a smaller one.</dd>
+<dt>DNG</dt><dd>Whatever wrote the file decides. Cameras that shoot DNG save full size; converters and phones usually save a small one.</dd>
+</dl>
+</section>
+
+<section class="sub">
+<h2>What is written, and where</h2>
+<p>A keep is Lightroom's pick flag, a reject its reject flag, and a favorite a pick with a purple label. They go into an XMP sidecar next to the file. A DNG carries its own metadata and Lightroom ignores a sidecar beside one, so there the verdict goes inside the file. The image data is never changed.</p>
+</section>
+
+<section class="sub">
+<h2>Not supported</h2>
+<p>Pentax PEF, Samsung SRW, Hasselblad 3FR, Sigma X3F and the old Canon CRW. Most of those cameras can also shoot DNG.</p>
+</section>
+
+</div>
+</main>
+<footer class="foot wrap"><b>CULL</b><nav aria-label="Footer"><a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./press.html">Press kit</a></nav><span>© 2026 Oliver Søgaard-Andersen · cull.photography</span></footer>
+</body>
 </html>

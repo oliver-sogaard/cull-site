@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * cull-site build: content in `content/` (Markdown) and `pages/` (HTML
+ * cull-site build: content in `content/` (Markdown and the hero's data) and `pages/` (HTML
  * bodies) → `docs/` (what GitHub Pages serves, from the main branch). No dependencies: the
- * Markdown the legal texts and the changelog use is headings, paragraphs,
- * lists, bold and links, and that is what `md()` renders.
+ * Markdown the legal texts and the changelog use is headings, paragraphs, lists, bold and
+ * links, and that is what `md()` renders.
  *
  * `node build.mjs`         build
  * `node build.mjs --sync`  first copy CHANGELOG.md and legal/*.md from the
@@ -21,9 +21,8 @@ const app = process.env.CULL_APP ? path.resolve(process.env.CULL_APP) : path.joi
 
 export const config = {
   name: "CULL",
-  tagline: "Keyboard-first culling for RAW shoots",
+  tagline: "Culling for RAW shoots",
   downloads: "https://github.com/oliver-sogaard/cull-releases/releases/latest",
-  /** Empty until the owner sets them (same values as src/product.ts). */
   supportEmail: "support@cull.photography",
   reportUrl: "",
   owner: "Oliver Søgaard-Andersen",
@@ -112,67 +111,85 @@ export function md(source) {
   return html.join("\n");
 }
 
-const nav = (active) =>
-  [
-    ["formats", "Formats"],
-    ["changelog", "What's new"],
-    ["support", "Support"],
-    ["pro", "Pro", "is-cta"],
-  ]
-    .map(([slug, label, cls]) =>
-      `<a href="./${slug}.html"${cls ? ` class="${cls}"` : ""}${active === slug ? ' aria-current="page"' : ""}>${label}</a>`,
-    )
-    .join("\n          ");
-
 const selling = () => config.store.env === "sandbox" || config.store.env === "live";
 
-/** A short content hash, so a changed script is fetched at once: GitHub
+/** A short content hash, so a changed file is fetched at once: GitHub
  *  Pages lets browsers keep a file for ten minutes. */
 const assetHash = (file) =>
   crypto.createHash("sha256").update(fs.readFileSync(path.join(here, "assets", file))).digest("hex").slice(0, 10);
+const asset = (file) => `./assets/${file}?v=${assetHash(file)}`;
+
+/** The nav pill: the same on every page, the current page marked. On phones only Download and Pro stay. */
+const navPill = (slug) =>
+  [
+    ["formats", "Formats", "link"],
+    ["changelog", "What's new", "link"],
+    ["support", "Support", "link"],
+    ["install", "Download", "link dl"],
+    ["pro", "Pro", "pro"],
+  ]
+    .map(([s, label, cls]) => `<a class="${cls}" href="./${s}.html"${slug === s ? ' aria-current="page"' : ""}>${label}</a>`)
+    .join("");
 
 /**
- * `head`: extra tags for this page's head. `scripts`: script tags placed
- * at the end of the body, in order. `store`: one of the store's pages, which
- * carry the test-mode strip while the checkout is Paddle's sandbox.
+ * The shell every page shares: the nav pill, the footer. `head`: extra tags for this
+ * page's head. `scripts`: script tags placed at the end of the body, in order. `store`:
+ * one of the store's pages, which carry the test-mode strip while the checkout is
+ * Paddle's sandbox. `home`: the body is the hero page and sets its own width.
  */
-export function layout({ slug, title, description, body, wide = false, head = "", scripts = [], store = false }) {
+export function layout({ slug, title, description, body, home = false, head = "", scripts = [], store = false, bodyClass = "" }) {
   return `<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${esc(title)}</title>
-    <meta name="description" content="${esc(description)}" />
-    <!-- Not released: removed on launch day. -->
-    <meta name="robots" content="noindex" />
-    <link rel="icon" href="./assets/icon-64.png" />
-    <link rel="stylesheet" href="./assets/site.css" />
-    <link rel="stylesheet" href="./assets/pages.css" />${head ? `\n    ${head}` : ""}
-  </head>
-  <body>${store && config.store.env === "sandbox" ? `\n    <div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>` : ""}
-    <header class="nav">
-      <div class="wrap nav__row">
-        <a class="nav__brand" href="./">CULL</a>
-        <nav class="nav__links" aria-label="Site">
-          ${nav(slug)}
-        </nav>
-      </div>
-    </header>
-    <main${wide ? "" : ' class="wrap page"'}>
-${body}
-    </main>
-    <footer class="footer">
-      <div class="wrap footer__row">
-        <div>
-          <a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
-        </div>
-        <div>© ${config.year} ${esc(config.owner)}</div>
-      </div>
-    </footer>${scripts.map((s) => `\n    ${s}`).join("")}
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+<!-- Not released: removed on launch day. -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="./assets/icon-64.png">
+<link rel="stylesheet" href="${asset("site.css")}">
+<link rel="stylesheet" href="${asset("pages.css")}">${head ? `\n${head}` : ""}
+</head>
+<body${bodyClass ? ` class="${bodyClass}"` : ""}>${store && config.store.env === "sandbox" ? `\n<div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>` : ""}
+<nav class="nav" aria-label="Site"><div class="pill glass"><a class="brand" href="./">CULL</a>${navPill(slug)}</div></nav>
+<main id="top"${home ? "" : ' class="wrap page"'}>
+${home ? body : `<div class="inner">\n${body}\n</div>`}
+</main>
+<footer class="foot wrap"><b>CULL</b><nav aria-label="Footer"><a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./press.html">Press kit</a></nav><span>© ${config.year} ${esc(config.owner)} · cull.photography</span></footer>${scripts.map((s) => `\n${s}`).join("")}
+</body>
 </html>
 `;
+}
+
+/** The home page: the cull hero on the shoot's frames, then the app on real frames. */
+function homePage(read) {
+  const seq = JSON.parse(read("content/hero/seq2.json"));
+  const SPR_COLS = 24;
+  const data = [
+    ["seq", JSON.stringify(seq)],
+    ["sets", read("content/hero/sets2.json").trim()],
+    ["bursts", read("content/hero/bursts2.json").trim()],
+  ]
+    .map(([id, json]) => `<script id="${id}" type="application/json">${json}</script>`)
+    .join("\n");
+  const body = read("pages/home.html")
+    .replaceAll("{{sprCols}}", String(SPR_COLS))
+    .replaceAll("{{sprRows}}", String(Math.ceil(seq.length / SPR_COLS)))
+    .replaceAll("{{downloads}}", config.downloads) + "\n" + data;
+  return layout({
+    slug: "index",
+    home: true,
+    title: "CULL · culling for RAW shoots",
+    description:
+      "CULL is the step before Lightroom: open the folder, judge each frame with one key, and the verdicts are already there when you import. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG. Windows and Mac.",
+    body,
+    head: [
+      `<link rel="preload" as="image" href="./assets/site/sheet-desk.jpg" media="(min-width: 761px)">`,
+      `<link rel="preload" as="image" href="./assets/site/sheet-phone.jpg" media="(max-width: 760px)">`,
+    ].join("\n"),
+    scripts: [`<script src="${asset("hero.js")}"></script>`, `<script src="${asset("home.js")}"></script>`],
+  });
 }
 
 /** The attributes a store page's script reads its settings from. */
@@ -185,12 +202,12 @@ function storeAttrs(page) {
     .join(" ");
 }
 
-const storeScript = () => `<script src="./assets/store.js?v=${assetHash("store.js")}" defer></script>`;
+const storeScript = () => `<script src="${asset("store.js")}" defer></script>`;
 
 /** A buy button, or nothing while the store is off. */
 const buyButton = (plan, label, primary) =>
   selling()
-    ? `<button class="btn${primary ? " btn--primary" : " btn--sm"}" type="button" data-buy="${plan}">${label}</button>`
+    ? `<button class="btn${primary ? "" : " btn--sm btn--ghost"}" type="button" data-buy="${plan}">${label}</button>`
     : "";
 
 function proPage(read) {
@@ -199,19 +216,19 @@ function proPage(read) {
     : "";
   const body = read("pages/pro.html")
     .replaceAll("{{storeAttrs}}", storeAttrs("pro"))
-    .replaceAll("{{buyLifetime}}", buyButton("lifetime", "Buy Lifetime", true))
+    .replaceAll("{{buyLifetime}}", buyButton("lifetime", "Buy Lifetime →", true))
     .replaceAll("{{buyYearly}}", buyButton("yearly", "Buy Yearly", false))
     .replaceAll("{{buyMonthly}}", buyButton("monthly", "Buy Monthly", false))
     .replaceAll(
       "{{storeNote}}",
       selling()
         ? ""
-        : `<p class="buy__fine">Sales open soon. Until then there's nothing to buy here. Free culls up to 250 frames in one session, with no time limit.</p>`,
+        : `<p class="buy__fine">Sales open soon. Until then there is nothing to buy here. Free culls up to 250 frames in one session, with no time limit.</p>`,
     )
     .replaceAll("{{supportEmailBlock}}", supportBlock);
   return layout({
     slug: "pro",
-    title: "CULL Pro — prices and how a license works",
+    title: "CULL Pro · prices and how a license works",
     description: "What CULL Pro costs (monthly, yearly or once for life), and how a license key works on two computers.",
     body,
     store: true,
@@ -240,9 +257,9 @@ function thanksPage(read) {
     // other site, and the page runs nothing but its own script. GitHub Pages
     // sets no headers, so both rules are meta tags.
     head: [
-      `<meta name="referrer" content="no-referrer" />`,
-      `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src ${config.store.apiUrl}; base-uri 'none'; form-action 'none'" />`,
-    ].join("\n    "),
+      `<meta name="referrer" content="no-referrer">`,
+      `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src ${config.store.apiUrl}; base-uri 'none'; form-action 'none'">`,
+    ].join("\n"),
     scripts: [storeScript()],
   });
 }
@@ -250,21 +267,21 @@ function thanksPage(read) {
 function keyPage(read) {
   const s = config.store;
   const form = s.turnstileSiteKey
-    ? `<p>Enter the email address you bought CULL Pro with.</p>
-          <form class="lost" id="lost-form" novalidate>
-            <input id="lost-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address" required />
-            <button class="btn btn--primary" type="submit" id="lost-send">Send my key</button>
-            <div class="cf-turnstile lost__check" data-sitekey="${esc(s.turnstileSiteKey)}" data-theme="dark"></div>
-            <p class="buy__trouble" id="lost-problem" role="alert" hidden></p>
-          </form>`
-    : `<p>Write to <a href="mailto:${esc(config.supportEmail)}">${esc(config.supportEmail)}</a> from the address you bought CULL Pro with, and the key is sent again.</p>`;
+    ? `<p class="lead">Enter the email address you bought CULL Pro with.</p>
+<form class="lost" id="lost-form" novalidate>
+<input id="lost-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address" required>
+<button class="btn" type="submit" id="lost-send">Send my key</button>
+<div class="cf-turnstile lost__check" data-sitekey="${esc(s.turnstileSiteKey)}" data-theme="dark"></div>
+<p class="buy__trouble" id="lost-problem" role="alert" hidden></p>
+</form>`
+    : `<p class="lead">Write to <a href="mailto:${esc(config.supportEmail)}">${esc(config.supportEmail)}</a> from the address you bought CULL Pro with, and the key is sent again.</p>`;
   const body = read("pages/key.html")
     .replaceAll("{{storeAttrs}}", storeAttrs("key"))
     .replaceAll("{{lostForm}}", form)
     .replaceAll("{{supportEmail}}", esc(config.supportEmail));
   return layout({
     slug: "key",
-    title: "Lost your key? — CULL",
+    title: "Lost your key? · CULL",
     description: "Have your CULL Pro key sent again to the address you bought it with.",
     body,
     store: true,
@@ -274,13 +291,13 @@ function keyPage(read) {
   });
 }
 
-function textPage({ slug, title, description, source, lead }) {
-  const body = `      <article class="prose">
-        <div class="eyebrow">${esc(title)}</div>
-        ${lead ? `<p class="hero__lead">${inline(lead)}</p>` : ""}
-        ${md(source).replace(/^<h1[^>]*>.*<\/h1>\n?/, "")}
-      </article>`;
-  return layout({ slug, title: `${title} — CULL`, description, body });
+/** A text page from Markdown: the title as the display line, the text at reading width. */
+function textPage({ slug, title, description, source, intro, bodyClass = "" }) {
+  const body = `<div class="head2"><p class="two">${esc(title)}${intro ? ` <span class="g">${inline(intro)}</span>` : ""}</p></div>
+<article class="prose">
+${md(source).replace(/^<h1[^>]*>.*<\/h1>\n?/, "")}
+</article>`;
+  return layout({ slug, title: `${title} · CULL`, description, body, bodyClass });
 }
 
 function copyDir(from, to) {
@@ -325,23 +342,13 @@ function build() {
 
   const read = (p) => fs.readFileSync(path.join(here, p), "utf8");
   const pages = [
-    {
-      slug: "index",
-      html: layout({
-        slug: "index",
-        title: "CULL — keyboard-first culling for RAW shoots",
-        description:
-          "CULL is a desktop app that culls a RAW shoot in minutes: keep, reject and favorite by keyboard, with verdicts saved where Lightroom reads them. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG.",
-        body: read("pages/home.html").replaceAll("{{downloads}}", config.downloads),
-        wide: true,
-      }),
-    },
+    { slug: "index", html: homePage(read) },
     {
       slug: "formats",
       html: layout({
         slug: "formats",
-        title: "Formats — CULL",
-        description: "Which RAW formats CULL opens, and what each one gives: full-size zoom, the AF point, and burst grouping, measured body by body.",
+        title: "Formats · CULL",
+        description: "Which RAW formats CULL opens, what each one gives, and where a verdict is written.",
         body: read("pages/formats.html"),
       }),
     },
@@ -352,16 +359,18 @@ function build() {
       slug: "changelog",
       html: textPage({
         slug: "changelog",
-        title: "What's new",
+        title: "What's new.",
+        intro: "Every release, newest first. The app updates itself.",
         description: "Every CULL release, newest first.",
         source: read("content/changelog.md"),
+        bodyClass: "changelog",
       }),
     },
     {
       slug: "support",
       html: layout({
         slug: "support",
-        title: "Support — CULL",
+        title: "Support · CULL",
         description: "How to report a problem with CULL, and what a report contains.",
         body: read("pages/support.html")
           .replaceAll("{{supportEmailBlock}}", config.supportEmail
@@ -373,9 +382,9 @@ function build() {
       slug: "install",
       html: layout({
         slug: "install",
-        title: "Installing CULL",
+        title: "Install CULL",
         description:
-          "How to install CULL on Windows and Mac, what the Windows SmartScreen screen means for an unsigned installer, and how to check a download by its checksum.",
+          "Download CULL for Windows or Mac, what the first launch says about an unsigned installer, and how to check a download by its checksum.",
         body: read("pages/install.html")
           .replaceAll("{{downloads}}", config.downloads)
           .replaceAll("{{downloadWindows}}", `${DL}/CULL-setup.exe`)
@@ -386,7 +395,8 @@ function build() {
       slug: "privacy",
       html: textPage({
         slug: "privacy",
-        title: "Privacy policy",
+        title: "Privacy.",
+        intro: "What CULL keeps on your computer, what leaves it and when, and your rights.",
         description: "What CULL keeps on your computer, what leaves it and when, and your rights.",
         source: read("content/privacy.md"),
       }),
@@ -395,7 +405,8 @@ function build() {
       slug: "terms",
       html: textPage({
         slug: "terms",
-        title: "License terms",
+        title: "License terms.",
+        intro: "The terms under which CULL is licensed to you.",
         description: "The terms under which CULL is licensed to you.",
         source: read("content/terms.md"),
       }),
@@ -404,7 +415,8 @@ function build() {
       slug: "terms-of-sale",
       html: textPage({
         slug: "terms-of-sale",
-        title: "Terms of sale",
+        title: "Terms of sale.",
+        intro: "Who sells CULL Pro, refunds, and canceling a subscription.",
         description: "The terms for buying CULL Pro: who sells it, refunds, and canceling a subscription.",
         source: read("content/terms-of-sale.md"),
       }),
@@ -413,7 +425,7 @@ function build() {
       slug: "press",
       html: layout({
         slug: "press",
-        title: "Press kit — CULL",
+        title: "Press kit · CULL",
         description: "Name, one-line description, icon and screenshots of CULL, free to use in coverage.",
         body: read("pages/press.html"),
       }),

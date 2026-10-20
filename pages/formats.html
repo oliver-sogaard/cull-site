@@ -1,26 +1,26 @@
-      <article class="prose">
-        <h1>Formats</h1>
-        <p class="hero__lead">
-          CULL shows you the preview your camera saved inside each RAW file. Most cameras
-          save one at full size, so zooming in shows every pixel. Some save a smaller one; then
-          the app zooms as far as that preview goes and says so in a small badge.
-        </p>
-        <dl class="formats-list">
-          <dt>Canon</dt><dd>CR3 and CR2. Full-size previews on every camera.</dd>
-          <dt>Nikon</dt><dd>NEF. Full-size previews on every camera.</dd>
-          <dt>Sony</dt><dd>ARW. Cameras from 2021 on save a full-size preview; older ones a smaller one.</dd>
-          <dt>Fujifilm</dt><dd>RAF. Every camera saves a preview at about half size.</dd>
-          <dt>Olympus and OM System</dt><dd>ORF. Every camera saves a 3,200-pixel preview.</dd>
-          <dt>Panasonic and Leica</dt><dd>RW2 and RWL. Cameras from 2022 on save a full-size preview; older ones a smaller one.</dd>
-          <dt>DNG</dt><dd>Whatever wrote the file decides. Cameras that shoot DNG save full size; converters and phones usually save a small one.</dd>
-        </dl>
-        <h2>What is written, and where</h2>
-        <p>
-          A keep is Lightroom's pick flag, a reject its reject flag, and a favorite a pick with
-          a purple label. They go into an XMP sidecar next to the file. A DNG carries its own
-          metadata and Lightroom ignores a sidecar beside one, so there the verdict goes inside
-          the file. The image data is never changed.
-        </p>
-        <h2>Not supported</h2>
-        <p>Pentax PEF, Samsung SRW, Hasselblad 3FR, Sigma X3F and the old Canon CRW. Most of those cameras can also shoot DNG.</p>
-      </article>
+<div class="head2"><p class="two">Nine RAW formats, straight from the card. <span class="g">Each frame opens from the preview the camera already wrote.</span></p></div>
+<p class="lead">Most cameras save one at full size, so zooming in shows every pixel. Some save a smaller one; then the app zooms as far as that preview goes and says so in a small badge.</p>
+<div class="formats"><span>CR3<b>Canon</b></span><span>CR2<b>Canon</b></span><span>ARW<b>Sony</b></span><span>NEF<b>Nikon</b></span><span>RAF<b>Fujifilm</b></span><span>ORF<b>Olympus</b></span><span>RW2<b>Panasonic</b></span><span>RWL<b>Leica</b></span><span>DNG<b>Adobe</b></span></div>
+
+<section class="sub">
+<h2>What each one gives</h2>
+<dl class="formats-list">
+<dt>Canon</dt><dd>CR3 and CR2. Full-size previews on every camera.</dd>
+<dt>Nikon</dt><dd>NEF. Full-size previews on every camera.</dd>
+<dt>Sony</dt><dd>ARW. Cameras from 2021 on save a full-size preview; older ones a smaller one.</dd>
+<dt>Fujifilm</dt><dd>RAF. Every camera saves a preview at about half size.</dd>
+<dt>Olympus and OM System</dt><dd>ORF. Every camera saves a 3,200-pixel preview.</dd>
+<dt>Panasonic and Leica</dt><dd>RW2 and RWL. Cameras from 2022 on save a full-size preview; older ones a smaller one.</dd>
+<dt>DNG</dt><dd>Whatever wrote the file decides. Cameras that shoot DNG save full size; converters and phones usually save a small one.</dd>
+</dl>
+</section>
+
+<section class="sub">
+<h2>What is written, and where</h2>
+<p>A keep is Lightroom's pick flag, a reject its reject flag, and a favorite a pick with a purple label. They go into an XMP sidecar next to the file. A DNG carries its own metadata and Lightroom ignores a sidecar beside one, so there the verdict goes inside the file. The image data is never changed.</p>
+</section>
+
+<section class="sub">
+<h2>Not supported</h2>
+<p>Pentax PEF, Samsung SRW, Hasselblad 3FR, Sigma X3F and the old Canon CRW. Most of those cameras can also shoot DNG.</p>
+</section>

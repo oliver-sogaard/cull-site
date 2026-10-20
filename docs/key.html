@@ -1,64 +1,45 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lost your key? — CULL</title>
-    <meta name="description" content="Have your CULL Pro key sent again to the address you bought it with." />
-    <!-- Not released: removed on launch day. -->
-    <meta name="robots" content="noindex" />
-    <link rel="icon" href="./assets/icon-64.png" />
-    <link rel="stylesheet" href="./assets/site.css" />
-    <link rel="stylesheet" href="./assets/pages.css" />
-  </head>
-  <body>
-    <div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>
-    <header class="nav">
-      <div class="wrap nav__row">
-        <a class="nav__brand" href="./">CULL</a>
-        <nav class="nav__links" aria-label="Site">
-          <a href="./formats.html">Formats</a>
-          <a href="./changelog.html">What's new</a>
-          <a href="./support.html">Support</a>
-          <a href="./pro.html" class="is-cta">Pro</a>
-        </nav>
-      </div>
-    </header>
-    <main class="wrap page">
-      <article class="prose" data-store="key" data-env="sandbox" data-api="https://api.cull.photography">
-        <section data-state="form">
-          <div class="eyebrow">Lost your key?</div>
-          <h1 class="buy__title">Have it sent again.</h1>
-          <p>Enter the email address you bought CULL Pro with.</p>
-          <form class="lost" id="lost-form" novalidate>
-            <input id="lost-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address" required />
-            <button class="btn btn--primary" type="submit" id="lost-send">Send my key</button>
-            <div class="cf-turnstile lost__check" data-sitekey="0x4AAAAAAFNzi3zLR0LghzKn" data-theme="dark"></div>
-            <p class="buy__trouble" id="lost-problem" role="alert" hidden></p>
-          </form>
-        </section>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lost your key? · CULL</title>
+<meta name="description" content="Have your CULL Pro key sent again to the address you bought it with.">
+<!-- Not released: removed on launch day. -->
+<meta name="robots" content="noindex">
+<link rel="icon" href="./assets/icon-64.png">
+<link rel="stylesheet" href="./assets/site.css?v=fab6df1256">
+<link rel="stylesheet" href="./assets/pages.css?v=95f49a334f">
+</head>
+<body>
+<div class="teststrip" role="note">Test mode · no real payment is taken on this page</div>
+<nav class="nav" aria-label="Site"><div class="pill glass"><a class="brand" href="./">CULL</a><a class="link" href="./formats.html">Formats</a><a class="link" href="./changelog.html">What's new</a><a class="link" href="./support.html">Support</a><a class="link dl" href="./install.html">Download</a><a class="pro" href="./pro.html">Pro</a></div></nav>
+<main id="top" class="wrap page">
+<div class="inner">
+<article data-store="key" data-env="sandbox" data-api="https://api.cull.photography">
+<section data-state="form">
+<div class="eyebrow">Lost your key?</div>
+<div class="head2"><p class="two">Have it sent again.</p></div>
+<p class="lead">Enter the email address you bought CULL Pro with.</p>
+<form class="lost" id="lost-form" novalidate>
+<input id="lost-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" aria-label="Email address" required>
+<button class="btn" type="submit" id="lost-send">Send my key</button>
+<div class="cf-turnstile lost__check" data-sitekey="0x4AAAAAAFNzi3zLR0LghzKn" data-theme="dark"></div>
+<p class="buy__trouble" id="lost-problem" role="alert" hidden></p>
+</form>
+</section>
 
-        <section data-state="answer" hidden>
-          <div class="eyebrow">Lost your key?</div>
-          <h1 class="buy__title">Check your email.</h1>
-          <div class="answer" role="status">
-            <strong>If that address has a license, the key is on its way.</strong>
-            It comes from hello@cull.photography. Nothing after a few minutes? Try the address
-            you paid with, or write to support@cull.photography.
-          </div>
-        </section>
-      </article>
+<section data-state="answer" hidden>
+<div class="eyebrow">Lost your key?</div>
+<div class="head2"><p class="two">Check your email.</p></div>
+<div class="answer" role="status"><strong>If that address has a license, the key is on its way.</strong> It comes from hello@cull.photography. Nothing after a few minutes? Try the address you paid with, or write to support@cull.photography.</div>
+</section>
+</article>
 
-    </main>
-    <footer class="footer">
-      <div class="wrap footer__row">
-        <div>
-          <a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy policy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./terms-of-sale.html#refunds">Refunds</a><a href="./press.html">Press kit</a>
-        </div>
-        <div>© 2026 Oliver Søgaard-Andersen</div>
-      </div>
-    </footer>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <script src="./assets/store.js?v=8dbb5daeba" defer></script>
-  </body>
+</div>
+</main>
+<footer class="foot wrap"><b>CULL</b><nav aria-label="Footer"><a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./press.html">Press kit</a></nav><span>© 2026 Oliver Søgaard-Andersen · cull.photography</span></footer>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="./assets/store.js?v=8dbb5daeba" defer></script>
+</body>
 </html>
