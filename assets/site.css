@@ -40,7 +40,11 @@ img { display: block; max-width: 100%; height: auto; }
 
 /* ── the cull: the app's grid, one measure at a time ── */
 .cull { height: 420vh; position: relative; }
-.stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--bg); }
+/* the large viewport: the stage covers the screen whether or not the browser's bars are showing, and nothing re-lays out when they slide */
+.stage { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; background: var(--bg); }
+/* bottom-anchored pieces sit above the small viewport's edge, i.e. above the bar when it shows, and keep that place when it goes */
+:root { --barroom: 0px; }
+@supports (height: 100lvh) { :root { --barroom: calc(100lvh - 100svh); } }
 .sheet { position: absolute; }
 /* the cell: a square of --cellw with a --pad corridor on every side (the app's 9 px at a 168 px cell) */
 .cell { position: absolute; width: var(--cellw); height: var(--cellw); transition: opacity 520ms cubic-bezier(.2,.7,.2,1), transform 620ms cubic-bezier(.2,.7,.2,1); }
@@ -80,7 +84,7 @@ img { display: block; max-width: 100%; height: auto; }
 .counter .keeps, .counter .keeps b { color: var(--keep); }
 .counter .favs, .counter .favs b { color: var(--fav); }
 
-.invite { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); z-index: 6; display: flex; flex-direction: column; align-items: center; gap: 12px; transition: opacity 400ms ease, transform 400ms ease; pointer-events: none; }
+.invite { position: absolute; left: 50%; bottom: calc(34px + var(--barroom)); transform: translateX(-50%); z-index: 6; display: flex; flex-direction: column; align-items: center; gap: 12px; transition: opacity 400ms ease, transform 400ms ease; pointer-events: none; }
 .invite .line { font-family: var(--display); font-weight: 300; font-variation-settings: "opsz" 60; font-size: clamp(22px, 2.6vw, 34px); line-height: 1; color: var(--ink); white-space: nowrap; text-wrap: balance; }
 .invite .line em { font-style: italic; color: var(--accent); }
 .invite .k { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
@@ -93,7 +97,7 @@ img { display: block; max-width: 100%; height: auto; }
 .photo img { width: 100%; height: 100%; object-fit: cover; }
 .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(7,7,8,.88) 0%, rgba(7,7,8,.45) 32%, rgba(7,7,8,0) 58%); opacity: 0; transition: opacity 500ms ease; }
 .stage.done .photo::after { opacity: 1; }
-.claim { position: absolute; left: var(--gutter); right: var(--gutter-r); bottom: 0; z-index: 8; opacity: 0; transform: translateY(16px); transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1); padding-bottom: 40px; }
+.claim { position: absolute; left: var(--gutter); right: var(--gutter-r); bottom: 0; z-index: 8; opacity: 0; transform: translateY(16px); transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1); padding-bottom: calc(40px + var(--barroom)); }
 .stage.done .claim { opacity: 1; transform: none; }
 .claim .inner { max-width: 1100px; }
 h1 { font-family: var(--display); font-weight: 300; font-variation-settings: "opsz" 144; font-size: clamp(34px, 6.3vw, 92px); line-height: 0.98; letter-spacing: -0.015em; margin: 0 0 18px; text-wrap: balance; }
@@ -110,7 +114,7 @@ html[data-os="phone"] .onphone { display: block; }
   :root { --sheet: url(./site/sheet-phone.jpg); }
   .rail .lab, .burst .lab { display: none; }
   .cell .frame { border-radius: 1px; }
-  .photo { border-radius: 0; box-shadow: none; } .claim { padding-bottom: 28px; }
+  .photo { border-radius: 0; box-shadow: none; } .claim { padding-bottom: calc(28px + var(--barroom)); }
   .claim .tag .x { display: none; } .claim p { display: none; } .claim .acts { margin-top: 18px; } .claim .acts .quiet { display: none; }
   .counter { top: 64px; font-size: 10.5px; gap: 12px; padding: 6px 10px; }
   .invite .line { font-size: 20px; white-space: normal; text-align: center; }
