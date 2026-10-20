@@ -151,7 +151,7 @@
   // the scroll position is the target; what is drawn follows it with a 90 ms time constant, so a wheel's steps become motion
   let target = 0, animating = false, lastT = 0;
   function onScroll() { const r = section.getBoundingClientRect(); target = Math.min(1, Math.max(0, -r.top / (r.height - stage.offsetHeight))); if (target > 0.005) scrolled = true; if (!animating) { animating = true; lastT = performance.now(); requestAnimationFrame(tick); } }
-  function tick(now) { const dt = Math.min(64, now - lastT); lastT = now; const d = target - lastP; if (Math.abs(d) < 0.0003) { render(target); animating = false; return; } render(lastP + d * (1 - Math.exp(-dt / 90))); requestAnimationFrame(tick); }
+  function tick(now) { const dt = Math.min(64, now - lastT); lastT = now; const d = target - lastP; if (Math.abs(d) < 0.0003) { render(target); animating = false; return; } render(lastP + d * (1 - Math.exp(-dt / (touch ? 140 : 90)))); requestAnimationFrame(tick); }
   let lastW = innerWidth, lastH = innerHeight, rt = 0;
   addEventListener('resize', () => { if (innerWidth === lastW && (touch || Math.abs(innerHeight - lastH) < 80)) return; lastW = innerWidth; lastH = innerHeight; clearTimeout(rt); rt = setTimeout(build, 120); });
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) { section.style.height = '100vh'; invite.classList.add('off'); scrolled = true; build(); render(1); }
