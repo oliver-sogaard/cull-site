@@ -31,7 +31,7 @@
 </div>
 <p>The screen means the installer carries no publisher certificate. It does not mean anything was found in it. Windows shows it for any installer it has not seen many times before, and the updates CULL installs later do not show it.</p>
 <h3>Why it is not signed</h3>
-<p>CULL is made by one person. A Windows signing certificate costs more each year than CULL earns, so the installer goes out unsigned. If that changes, the screen goes away on its own.</p>
+<p>CULL is made by one person. A signing certificate costs more each year than CULL earns, on Windows and on Mac alike, so the installers go out unsigned. If that changes, the screen goes away on its own.</p>
 <h3>Check the download yourself</h3>
 <p>Each release lists the SHA-256 of both installers and a VirusTotal link, where seventy-odd antivirus engines report on that exact file. To compare the checksum, open PowerShell and run <code>Get-FileHash ~\Downloads\CULL-setup.exe</code>; the hash it prints should match the one on the <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest">downloads page</a>.</p>
 </section>
@@ -39,8 +39,13 @@
 <section class="sub" id="mac">
 <h2>Mac</h2>
 <p>Open <strong>CULL.dmg</strong> and drag CULL to Applications. CULL runs on Apple silicon Macs.</p>
-<p>Until CULL is notarized by Apple, the first launch says the app could not be verified. Close that message, open <strong>System Settings → Privacy &amp; Security</strong>, scroll down to the line that names CULL, click <strong>Open Anyway</strong> and confirm. From then on it opens like any app.</p>
-<p>To check the download, open Terminal and run <code>shasum -a 256 ~/Downloads/CULL.dmg</code> and compare it with the <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest">downloads page</a>.</p>
+<p>The first launch says <strong>"CULL" is damaged and can't be opened</strong>. It is not. That is the message macOS shows for any downloaded app that carries no Apple certificate. Open Terminal and run</p>
+<p><code>xattr -cr /Applications/CULL.app</code></p>
+<p>then open CULL from Applications. From then on it opens like any app.</p>
+<h3>Why it is not notarized</h3>
+<p>Like the Windows installer, the Mac app is unsigned: the yearly Apple developer fee costs more than CULL earns. The message is about the missing certificate, not about the file. If that changes, the message goes away on its own.</p>
+<h3>Check the download yourself</h3>
+<p>Open Terminal and run <code>shasum -a 256 ~/Downloads/CULL.dmg</code> and compare it with the <a href="https://github.com/oliver-sogaard/cull-releases/releases/latest">downloads page</a>.</p>
 </section>
 
 <section class="sub">
