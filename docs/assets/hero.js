@@ -112,19 +112,19 @@
     render(lastP);
   }
   const lerp = (a, b, t) => a + (b - a) * t;
-  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
   let lastP = 0, scrolled = false;
   function render(p) {
     lastP = p;
     const sweep = Math.min(1, Math.max(0, (p - 0.04) / 0.52));
     const clear = Math.min(1, Math.max(0, (p - 0.56) / 0.07));
-    const grow = Math.min(1, Math.max(0, (p - 0.60) / 0.22));
+    const grow = Math.min(1, Math.max(0, (p - 0.60) / 0.27));
     decideTo(Math.round(sweep * cells.length), !scrolled && sweep === 0);
     invite.classList.toggle('off', p > 0.02);
     sheet.classList.toggle('clear', clear > 0);
     sheet.classList.toggle('gone', grow > 0.06);
-    stage.classList.toggle('done', p > 0.80);
-    const drip = Math.min(1, Math.max(0, (p - 0.84) / 0.15));
+    stage.classList.toggle('done', p > 0.84);
+    const drip = Math.min(1, Math.max(0, (p - 0.87) / 0.13));
     for (const s of stars) s.c.classList.toggle('drip', s.at <= drip);
     if (from && to) {
       const t = ease(grow);
@@ -136,14 +136,16 @@
       photo.style.transform = `translate(${x}px, ${y}px)`; photo.style.opacity = grow > 0 ? 1 : 0;
     }
   }
-  function onScroll() { const r = section.getBoundingClientRect(); const p = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))); if (p > 0.005) scrolled = true; render(p); }
+  // the scroll position is the target; what is drawn follows it with a 90 ms time constant, so a wheel's steps become motion
+  let target = 0, animating = false, lastT = 0;
+  function onScroll() { const r = section.getBoundingClientRect(); target = Math.min(1, Math.max(0, -r.top / (r.height - innerHeight))); if (target > 0.005) scrolled = true; if (!animating) { animating = true; lastT = performance.now(); requestAnimationFrame(tick); } }
+  function tick(now) { const dt = Math.min(64, now - lastT); lastT = now; const d = target - lastP; if (Math.abs(d) < 0.0003) { render(target); animating = false; return; } render(lastP + d * (1 - Math.exp(-dt / 90))); requestAnimationFrame(tick); }
   let lastW = innerWidth, lastH = innerHeight, rt = 0;
   addEventListener('resize', () => { if (innerWidth === lastW && Math.abs(innerHeight - lastH) < 80) return; lastW = innerWidth; lastH = innerHeight; clearTimeout(rt); rt = setTimeout(build, 120); });
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) { section.style.height = '100vh'; invite.classList.add('off'); scrolled = true; build(); render(1); }
   else {
-    let ticking = false;
-    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); } }, { passive: true });
+    addEventListener('scroll', onScroll, { passive: true });
     build();
-    requestAnimationFrame(onScroll);
+    onScroll();
   }
 })();
