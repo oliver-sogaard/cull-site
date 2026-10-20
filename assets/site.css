@@ -159,8 +159,8 @@ figure.frame figcaption { display: flex; justify-content: space-between; margin-
 .foot b { color: var(--accent); font-weight: 500; letter-spacing: .3em; }
 .foot nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .foot nav a:hover { color: var(--ink); }
-@media (max-width: 900px) { .split { grid-template-columns: 1fr; } .code pre { min-height: 0; white-space: pre-wrap; overflow-wrap: anywhere; } }
-@media (max-width: 760px) { .sect { padding-top: 80px; } .sect + .sect { padding-top: 72px; } .keys { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; } .code { font-size: 11px; } .close { padding-top: 88px; } }
+@media (max-width: 900px) { .split { grid-template-columns: 1fr; } .code pre { min-height: 0; } }
+@media (max-width: 760px) { .sect { padding-top: 80px; } .sect + .sect { padding-top: 72px; } figure.app .shot, .panel.code { margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter-r)); border-radius: 0; border-left: 0; border-right: 0; } .code { padding: 18px var(--gutter); } .code pre { font-size: 11px; } .keys { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; } .code { font-size: 11px; } .close { padding-top: 88px; } }
 @media (prefers-reduced-motion: no-preference) { .js .rv { opacity: 0; transform: translateY(18px); transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1); } .js .rv.in { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
