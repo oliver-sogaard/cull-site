@@ -24,8 +24,8 @@ export const config = {
   tagline: "Culling for RAW shoots",
   /** Where the site lives: canonical links, the share card and the sitemap are absolute. */
   url: "https://cull.photography/",
-  /** The launch switch. false: every page says noindex to search engines. Flip on launch day. */
-  released: false,
+  /** The launch switch: flipped 2026-10-21. While false every page said noindex to search engines. */
+  released: true,
   downloads: "https://github.com/oliver-sogaard/cull-releases/releases/latest",
   supportEmail: "support@cull.photography",
   reportUrl: "",
@@ -271,6 +271,8 @@ function thanksPage(read) {
     description: "The page that shows your CULL Pro key after payment.",
     body,
     store: true,
+    // Reached from the checkout, never from a search.
+    index: false,
     // The address carries the id that unlocks the key: it is sent to no
     // other site, and the page runs nothing but its own script. GitHub Pages
     // sets no headers, so both rules are meta tags.
