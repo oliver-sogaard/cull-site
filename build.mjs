@@ -22,6 +22,10 @@ const app = process.env.CULL_APP ? path.resolve(process.env.CULL_APP) : path.joi
 export const config = {
   name: "CULL",
   tagline: "Culling for RAW shoots",
+  /** Where the site lives: canonical links, the share card and the sitemap are absolute. */
+  url: "https://cull.photography/",
+  /** The launch switch. false: every page says noindex to search engines. Flip on launch day. */
+  released: false,
   downloads: "https://github.com/oliver-sogaard/cull-releases/releases/latest",
   supportEmail: "support@cull.photography",
   reportUrl: "",
@@ -119,6 +123,9 @@ const assetHash = (file) =>
   crypto.createHash("sha256").update(fs.readFileSync(path.join(here, "assets", file))).digest("hex").slice(0, 10);
 const asset = (file) => `./assets/${file}?v=${assetHash(file)}`;
 
+/** A page's public address: the home page is the bare domain, the rest their file. */
+const pageUrl = (slug) => (slug === "index" ? config.url : `${config.url}${slug}.html`);
+
 /** The nav pill: the same on every page, the current page marked. On phones only Download and Pro stay. */
 const navPill = (slug) =>
   [
@@ -137,16 +144,26 @@ const navPill = (slug) =>
  * one of the store's pages, which carry the test-mode strip while the checkout is
  * Paddle's sandbox. `home`: the body is the hero page and sets its own width.
  */
-export function layout({ slug, title, description, body, home = false, head = "", scripts = [], store = false, bodyClass = "" }) {
+export function layout({ slug, title, description, body, home = false, head = "", scripts = [], store = false, bodyClass = "", index = true }) {
+  const canonical = pageUrl(slug);
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(title)}</title>
-<meta name="description" content="${esc(description)}">
-<!-- Not released: removed on launch day. -->
-<meta name="robots" content="noindex">
+<meta name="description" content="${esc(description)}">${index && config.released ? "" : `\n<meta name="robots" content="noindex">`}
+<link rel="canonical" href="${canonical}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CULL">
+<meta property="og:url" content="${canonical}">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:image" content="${config.url}assets/site/og.jpg?v=${assetHash("site/og.jpg")}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Half Dome at sunset with the words: Five thousand frames. One evening. Five keys.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="./assets/icon-64.png">
 <link rel="stylesheet" href="${asset("site.css")}">
 <link rel="stylesheet" href="${asset("pages.css")}">
@@ -301,6 +318,19 @@ ${md(source).replace(/^<h1[^>]*>.*<\/h1>\n?/, "")}
   return layout({ slug, title: `${title} · CULL`, description, body, bodyClass });
 }
 
+/** GitHub Pages serves this at every address that does not exist, at any depth, so
+ *  its links and assets are absolute; the shell's relative ones are rewritten. */
+function notFoundPage(read) {
+  const html = layout({
+    slug: "404",
+    title: "Not here · CULL",
+    description: "There is no page at this address.",
+    body: read("pages/404.html"),
+    index: false,
+  });
+  return html.replaceAll('href="./', 'href="/').replaceAll('src="./', 'src="/');
+}
+
 function copyDir(from, to) {
   fs.mkdirSync(to, { recursive: true });
   for (const f of fs.readdirSync(from)) {
@@ -440,6 +470,14 @@ function build() {
     },
   ];
   for (const p of pages) fs.writeFileSync(path.join(out, `${p.slug}.html`), p.html);
+  fs.writeFileSync(path.join(out, "404.html"), notFoundPage(read));
+  // The post-purchase page is reached from the checkout, not from a search.
+  const listed = pages.filter((p) => p.slug !== "thanks");
+  fs.writeFileSync(
+    path.join(out, "sitemap.xml"),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${listed.map((p) => `  <url><loc>${pageUrl(p.slug)}</loc></url>`).join("\n")}\n</urlset>\n`,
+  );
+  fs.writeFileSync(path.join(out, "robots.txt"), `User-agent: *\nDisallow: /thanks.html\n\nSitemap: ${config.url}sitemap.xml\n`);
   fs.writeFileSync(path.join(out, ".nojekyll"), "");
   console.log(`built ${pages.length} pages → ${out}`);
 }
