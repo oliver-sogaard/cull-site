@@ -130,6 +130,18 @@ button.btn { border: 0; font-family: var(--body); cursor: pointer; }
 .press-shots a.shot { display: block; }
 .press-shots figcaption a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); }
 .press-shots figcaption a:hover { color: var(--ink); text-decoration-color: var(--accent); }
+/* press: the film in both cuts at one height, wide beside upright; one under the other on phones */
+.press-video { max-width: none; }
+.press-videos { display: grid; grid-template-columns: minmax(0, 256fr) minmax(0, 81fr); gap: 18px; margin-top: 26px; }
+.pv { margin: 0; min-width: 0; }
+.pv .shot video { display: block; width: 100%; height: auto; background: #0c0c0d; }
+.pv figcaption { display: flex; justify-content: space-between; gap: 10px 32px; flex-wrap: wrap; margin-top: 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.pv figcaption b { font-weight: 500; color: var(--ink-2); }
+.pv figcaption a, .press-video figure.app figcaption a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); }
+.pv figcaption a:hover, .press-video figure.app figcaption a:hover { color: var(--ink); text-decoration-color: var(--accent); }
+.press-video figure.app { margin-top: 44px; }
+.press-video a.shot { display: block; }
+@media (max-width: 760px) { .press-videos { grid-template-columns: 1fr; gap: 28px; } .pv--tall { max-width: 300px; } }
 
 @media (max-width: 760px) {
   .page { padding-top: 104px; padding-bottom: 72px; }

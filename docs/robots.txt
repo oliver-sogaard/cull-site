@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /thanks
 Disallow: /thanks.html
 
 Sitemap: https://cull.photography/sitemap.xml

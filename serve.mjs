@@ -14,6 +14,7 @@ const types = {
   ".jpg": "image/jpeg",
   ".woff2": "font/woff2",
   ".svg": "image/svg+xml",
+  ".mp4": "video/mp4",
   ".txt": "text/plain; charset=utf-8",
 };
 
@@ -21,7 +22,8 @@ http
   .createServer((req, res) => {
     let p = decodeURIComponent(new URL(req.url, "http://x").pathname);
     if (p.endsWith("/")) p += "index.html";
-    const file = path.normalize(path.join(root, p));
+    let file = path.normalize(path.join(root, p));
+    if (!path.extname(file) && fs.existsSync(file + ".html")) file += ".html";
     if (!file.startsWith(root) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
       res.writeHead(404, { "content-type": "text/plain" });
       res.end("not found");

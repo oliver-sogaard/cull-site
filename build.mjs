@@ -125,7 +125,8 @@ const assetHash = (file) =>
 const asset = (file) => `./assets/${file}?v=${assetHash(file)}`;
 
 /** A page's public address: the home page is the bare domain, the rest their file. */
-const pageUrl = (slug) => (slug === "index" ? config.url : `${config.url}${slug}.html`);
+/** A page's public address: no extension. GitHub Pages serves /pro from pro.html, and the old .html addresses keep working. */
+const pageUrl = (slug) => (slug === "index" ? config.url : `${config.url}${slug}`);
 
 /** The nav pill: the same on every page, the current page marked. On phones only Download and Pro stay. */
 const navPill = (slug) =>
@@ -136,7 +137,7 @@ const navPill = (slug) =>
     ["install", "Download", "link dl"],
     ["pro", "Pro", "pro"],
   ]
-    .map(([s, label, cls]) => `<a class="${cls}" href="./${s}.html"${slug === s ? ' aria-current="page"' : ""}>${label}</a>`)
+    .map(([s, label, cls]) => `<a class="${cls}" href="./${s}"${slug === s ? ' aria-current="page"' : ""}>${label}</a>`)
     .join("");
 
 /**
@@ -175,7 +176,7 @@ export function layout({ slug, title, description, body, home = false, head = ""
 <main id="top"${home ? "" : ' class="wrap page"'}>
 ${home ? body : `<div class="inner">\n${body}\n</div>`}
 </main>
-<footer class="foot wrap"><b>CULL</b><nav aria-label="Footer"><a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./cull-photos.html">How to cull</a><a href="./cull-vs-lightroom.html">vs Lightroom</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./press.html">Press kit</a></nav><span>© ${config.year} ${esc(config.owner)} · cull.photography</span></footer>${scripts.map((s) => `\n${s}`).join("")}
+<footer class="foot wrap"><b>CULL</b><nav aria-label="Footer"><a href="./install">Install</a><a href="./formats">Formats</a><a href="./cull-photos">How to cull</a><a href="./cull-vs-lightroom">vs Lightroom</a><a href="./pro">Pro</a><a href="./changelog">What's new</a><a href="./support">Support</a><a href="./privacy">Privacy</a><a href="./terms">License terms</a><a href="./terms-of-sale">Terms of sale</a><a href="./press">Press kit</a></nav><span>© ${config.year} ${esc(config.owner)} · cull.photography</span></footer>${scripts.map((s) => `\n${s}`).join("")}
 </body>
 </html>
 `;
@@ -190,7 +191,7 @@ function structuredData(read) {
     price,
     priceCurrency: "USD",
     availability: "https://schema.org/InStock",
-    url: `${config.url}pro.html`,
+    url: `${config.url}pro`,
   });
   const data = {
     "@context": "https://schema.org",
@@ -204,7 +205,7 @@ function structuredData(read) {
     applicationSubCategory: "Photo culling",
     operatingSystem: "Windows 10, Windows 11, macOS",
     softwareVersion: version,
-    downloadUrl: `${config.url}install.html`,
+    downloadUrl: `${config.url}install`,
     screenshot: [`${config.url}assets/press/loupe.jpg`, `${config.url}assets/press/grid.jpg`, `${config.url}assets/press/zoom.jpg`],
     featureList: [
       "One key per frame: keep, reject, favorite",
@@ -566,7 +567,7 @@ function build() {
     path.join(out, "sitemap.xml"),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${listed.map((p) => `  <url><loc>${pageUrl(p.slug)}</loc><lastmod>${lastmod(p.sources)}</lastmod></url>`).join("\n")}\n</urlset>\n`,
   );
-  fs.writeFileSync(path.join(out, "robots.txt"), `User-agent: *\nDisallow: /thanks.html\n\nSitemap: ${config.url}sitemap.xml\n`);
+  fs.writeFileSync(path.join(out, "robots.txt"), `User-agent: *\nDisallow: /thanks\nDisallow: /thanks.html\n\nSitemap: ${config.url}sitemap.xml\n`);
   fs.writeFileSync(path.join(out, ".nojekyll"), "");
   console.log(`built ${pages.length} pages → ${out}`);
 }
