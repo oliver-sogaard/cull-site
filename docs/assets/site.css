@@ -97,7 +97,8 @@ img { display: block; max-width: 100%; height: auto; }
 .counter .favs, .counter .favs b { color: var(--fav); }
 
 .invite { position: absolute; left: 50%; bottom: calc(34px + var(--barroom)); transform: translateX(-50%); z-index: 6; display: flex; flex-direction: column; align-items: center; gap: 12px; transition: opacity 400ms ease, transform 400ms ease; pointer-events: none; }
-.invite .line { font-family: var(--display); font-weight: 300; font-variation-settings: "opsz" 60; font-size: clamp(22px, 2.6vw, 34px); line-height: 1; color: var(--ink); white-space: nowrap; text-wrap: balance; }
+.invite::before { content: ""; position: absolute; left: 50%; top: 50%; width: 180vw; height: 260%; transform: translate(-50%, -44%); background: radial-gradient(ellipse at center, rgba(7,7,8,0.92) 0%, rgba(7,7,8,0.78) 38%, rgba(7,7,8,0) 72%); z-index: -1; pointer-events: none; }
+.invite .line { font-family: var(--display); font-weight: 300; font-variation-settings: "opsz" 60; font-size: clamp(22px, 2.6vw, 34px); line-height: 1; color: var(--ink); white-space: nowrap; text-wrap: balance; text-shadow: 0 1px 2px rgba(7,7,8,0.9), 0 2px 18px rgba(7,7,8,0.9); }
 .invite .line em { font-style: italic; color: var(--accent); }
 .invite .k { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2); white-space: nowrap; }
 .invite .k .wheel { width: 14px; height: 22px; border: 1.5px solid var(--ink-2); border-radius: 8px; position: relative; }
@@ -129,7 +130,8 @@ html[data-os="phone"] .onphone { display: block; }
   .photo { border-radius: 0; box-shadow: none; } .claim { padding-bottom: calc(28px + var(--barroom)); }
   .claim .tag .x { display: none; } .claim p { display: none; } .claim .acts { margin-top: 18px; } .claim .acts .quiet { display: none; }
   .counter { top: 64px; font-size: 10.5px; gap: 12px; padding: 6px 10px; }
-  .invite .line { font-size: 20px; white-space: normal; text-align: center; }
+  .invite .line { font-size: 20px; white-space: normal; text-align: center; line-height: 1.12; }
+  .stage::before { height: 40%; background: linear-gradient(to top, rgba(7,7,8,1) 0%, rgba(7,7,8,.92) 30%, rgba(7,7,8,.55) 62%, rgba(7,7,8,0) 100%); }
 }
 
 /* ── the sections: one line, one real thing ── */
