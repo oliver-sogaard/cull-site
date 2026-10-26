@@ -18,7 +18,7 @@
 .sub li, .prose li { margin: 0 0 8px; }
 .sub strong, .prose strong { color: var(--ink); font-weight: 500; }
 .sub code, .prose code { font-family: var(--mono); font-size: 0.86em; padding: 1px 6px; border-radius: 4px; background: var(--panel); border: 1px solid var(--line); color: var(--ink); }
-.sub .kbd { vertical-align: -5px; }
+.sub .kbd { vertical-align: middle; position: relative; top: -1px; margin: 0 1px; }
 
 /* text pages rendered from Markdown */
 .prose { max-width: 44rem; }
