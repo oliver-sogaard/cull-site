@@ -1,0 +1,60 @@
+<div class="head2"><p class="two">Culling in Lightroom, or before it. <span class="g">What each does well, and how the two fit together.</span></p></div>
+<p class="lead">Lightroom can cull. Many photographers run the whole pass in the Library module with P, X and the arrows, and it works. The question is whether that is the best hour of the job or the slowest one. This is the comparison, point by point, with the handoff at the end.</p>
+
+<section class="sub">
+<h2>Before anything is sharp</h2>
+<p>Lightroom renders its own previews, and until it has, a frame on screen is soft and the loupe lags behind the key. On a few thousand RAW files the wait runs from minutes to the better part of an hour, depending on the computer and the preview size you asked for. CULL reads the full-size JPEG the camera already wrote inside each file, so the folder is on screen in seconds and the first frame is sharp when you reach it.</p>
+</section>
+
+<section class="sub">
+<h2>The keys</h2>
+<p>In Lightroom: P picks, X rejects, U clears, the arrows move, and Caps Lock turns on auto-advance so a verdict also moves to the next frame. Z zooms to the point you click. In CULL: Enter keeps, Backspace rejects, F marks a favorite, the arrows move, and every verdict advances. Hold Space and the frame is at 100 % at the point the camera focused; let go and you are back. Both are fast once learned. The difference is that CULL's keys are the whole app, with nothing between the hand and the next frame.</p>
+</section>
+
+<section class="sub">
+<h2>Twins and bursts</h2>
+<p>Lightroom's filmstrip is flat. Stacking by capture time exists, but it is a menu away and the stacks still open one at a time. CULL groups frames of one scene before you reach them and boxes a burst as one, so the choice is always "which of these" rather than "is this one any good". That is where most of the time in a cull is won.</p>
+</section>
+
+<section class="sub">
+<h2>The catalog</h2>
+<p>Culling in Lightroom means importing everything first. Every frame becomes a catalog row with previews on disk, including the ones you will reject in the next minute. Culling before import means only the keeps are ever imported, and the catalog stays the size of your work.</p>
+</section>
+
+<section class="sub">
+<h2>What Lightroom does better</h2>
+<p>Everything after the cull. Editing, stars for finished work, collections, export, the catalog itself. CULL stops where that begins. It writes a keep as Lightroom's pick flag, a reject as its reject flag and a favorite as a pick with a purple label, into an XMP sidecar beside the file, so Lightroom reads the verdicts on import as if you had made them there. The image data is never touched.</p>
+</section>
+
+<section class="sub">
+<h2>Side by side</h2>
+<table class="vs">
+<thead><tr><th scope="col"></th><th scope="col">Lightroom Classic</th><th scope="col">CULL</th></tr></thead>
+<tbody>
+<tr><td>First frame sharp</td><td data-l="Lightroom">After its previews are built, minutes to an hour on a large folder.</td><td data-l="CULL">In seconds, from the preview the camera wrote.</td></tr>
+<tr><td>Keys</td><td data-l="Lightroom">P pick, X reject, U clear, arrows; Caps Lock to auto-advance.</td><td data-l="CULL">Enter keep, Backspace reject, F favorite, arrows. Every verdict advances.</td></tr>
+<tr><td>100 % view</td><td data-l="Lightroom">Z, at the point you click.</td><td data-l="CULL">Hold Space, at the point the camera focused.</td></tr>
+<tr><td>Frames of one scene</td><td data-l="Lightroom">A flat filmstrip; stacking by time on request.</td><td data-l="CULL">Grouped before you reach them; bursts boxed as one.</td></tr>
+<tr><td>Where the verdict lives</td><td data-l="Lightroom">In the catalog; in the sidecar if you save metadata to file.</td><td data-l="CULL">In the sidecar as you go, in Lightroom's own flags and label.</td></tr>
+<tr><td>What enters the catalog</td><td data-l="Lightroom">The whole shoot.</td><td data-l="CULL">The keeps.</td></tr>
+<tr><td>Formats</td><td data-l="Lightroom">Nearly every RAW format made.</td><td data-l="CULL">Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG. <a href="./formats.html">The list.</a></td></tr>
+<tr><td>Price</td><td data-l="Lightroom">Part of an Adobe subscription.</td><td data-l="CULL">Free up to 250 frames a session. Pro $7.99 a month, $49.99 a year or $129.99 once.</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="sub">
+<h2>Other culling tools</h2>
+<p>Photo Mechanic is the long-standing choice of news and sports photographers, and it works on the same principle: the embedded JPEG, the keys, the sidecar. Narrative Select, FilterPixel, Aftershoot and Imagen cull with a model that scores the frames for focus, eyes and duplicates, so part of the decision is made for you. CULL keeps the first idea and none of the second. The decision stays yours, and the app's one job is to make it take one key.</p>
+</section>
+
+<section class="sub">
+<h2>The handoff</h2>
+<ul>
+<li>Cull the folder in CULL. Close it when every frame is decided.</li>
+<li>In Lightroom, import the folder with <strong>Add</strong>, not Copy, so the files stay where they are and the sidecars beside them are read.</li>
+<li>Filter on Flagged. Those are the keeps; the purple ones are the favorites. The rejects are flagged as rejects and can be left out of the import or deleted from the catalog in one step.</li>
+<li>If the folder was already in the catalog, select the photos and choose <strong>Metadata → Read Metadata from Files</strong>.</li>
+</ul>
+<p><a href="./cull-photos.html">The method behind the pass</a>, or <a href="./install.html">download CULL</a> and run it on the next shoot.</p>
+</section>

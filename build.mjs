@@ -9,6 +9,7 @@
  * `node build.mjs --sync`  first copy CHANGELOG.md and legal/*.md from the
  *                          app checkout beside this folder, then build
  */
+import { execSync } from "node:child_process";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -174,10 +175,49 @@ export function layout({ slug, title, description, body, home = false, head = ""
 <main id="top"${home ? "" : ' class="wrap page"'}>
 ${home ? body : `<div class="inner">\n${body}\n</div>`}
 </main>
-<footer class="foot wrap"><b>CULL</b><nav aria-label="Footer"><a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./press.html">Press kit</a></nav><span>© ${config.year} ${esc(config.owner)} · cull.photography</span></footer>${scripts.map((s) => `\n${s}`).join("")}
+<footer class="foot wrap"><b>CULL</b><nav aria-label="Footer"><a href="./install.html">Install</a><a href="./formats.html">Formats</a><a href="./cull-photos.html">How to cull</a><a href="./cull-vs-lightroom.html">vs Lightroom</a><a href="./pro.html">Pro</a><a href="./changelog.html">What's new</a><a href="./support.html">Support</a><a href="./privacy.html">Privacy</a><a href="./terms.html">License terms</a><a href="./terms-of-sale.html">Terms of sale</a><a href="./press.html">Press kit</a></nav><span>© ${config.year} ${esc(config.owner)} · cull.photography</span></footer>${scripts.map((s) => `\n${s}`).join("")}
 </body>
 </html>
 `;
+}
+
+/** The app, described for search engines: what it is, what it runs on, what it costs. */
+function structuredData(read) {
+  const version = (read("content/changelog.md").match(/^## (\d+\.\d+\.\d+)/m) || [])[1] || "1.0.0";
+  const offer = (name, price) => ({
+    "@type": "Offer",
+    name,
+    price,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    url: `${config.url}pro.html`,
+  });
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: config.name,
+    url: config.url,
+    image: `${config.url}assets/app-icon.png`,
+    description:
+      "Photo culling software for photographers. Open a folder of RAW files, judge each frame with one key, and the verdicts are written where Lightroom reads them. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG.",
+    applicationCategory: "MultimediaApplication",
+    applicationSubCategory: "Photo culling",
+    operatingSystem: "Windows 10, Windows 11, macOS",
+    softwareVersion: version,
+    downloadUrl: `${config.url}install.html`,
+    screenshot: [`${config.url}assets/press/loupe.jpg`, `${config.url}assets/press/grid.jpg`, `${config.url}assets/press/zoom.jpg`],
+    featureList: [
+      "One key per frame: keep, reject, favorite",
+      "Frames of one scene grouped before you reach them",
+      "100 % view at the point the camera focused",
+      "Verdicts written as Lightroom's pick, reject and purple label in an XMP sidecar",
+      "Nine RAW formats, straight from the card",
+    ],
+    offers: [offer("Free", "0"), offer("Pro, monthly", "7.99"), offer("Pro, yearly", "49.99"), offer("Pro, lifetime", "129.99")],
+    author: { "@type": "Person", name: config.owner },
+    publisher: { "@type": "Person", name: config.owner, url: config.url },
+  };
+  return JSON.stringify(data).replaceAll("<", "\\u003c");
 }
 
 /** The home page: the cull hero on the shoot's frames, then the app on real frames. */
@@ -198,13 +238,14 @@ function homePage(read) {
   return layout({
     slug: "index",
     home: true,
-    title: "CULL · culling for RAW shoots",
+    title: "CULL · photo culling for RAW, the step before Lightroom",
     description:
-      "CULL is the step before Lightroom: open the folder, judge each frame with one key, and the verdicts are already there when you import. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG. Windows and Mac.",
+      "Photo culling software for Windows and Mac. Open a folder of RAW files, cull each frame with one key, and the keeps and rejects are already there when you import into Lightroom. Canon, Sony, Nikon, Fujifilm, Olympus, Panasonic, Leica and DNG.",
     body,
     head: [
       `<link rel="preload" as="image" href="${asset("site/sheet-desk.jpg")}" media="(min-width: 761px)">`,
       `<link rel="preload" as="image" href="${asset("site/sheet-phone.jpg")}" media="(max-width: 760px)">`,
+      `<script type="application/ld+json">${structuredData(read)}</script>`,
     ].join("\n"),
     scripts: [`<script src="${asset("hero.js")}"></script>`, `<script src="${asset("home.js")}"></script>`],
   });
@@ -362,6 +403,22 @@ function sync() {
   console.log(`synced ${pairs.length} files from ${app}`);
 }
 
+/**
+ * When a page's sources last changed, for the sitemap: the date of their last commit, or
+ * today when one of them is edited and not yet committed (a build precedes its commit).
+ */
+function lastmod(sources = []) {
+  const today = new Date().toISOString().slice(0, 10);
+  if (sources.length === 0) return today;
+  try {
+    const git = (args) => execSync(`git ${args} -- ${sources.map((s) => JSON.stringify(s)).join(" ")}`, { cwd: here, stdio: ["ignore", "pipe", "ignore"] }).toString().trim();
+    if (git("status --porcelain")) return today;
+    return git("log -1 --format=%cs") || today;
+  } catch {
+    return today;
+  }
+}
+
 function build() {
   // Empty the folder rather than remove it: a shell or server sitting in it would refuse the removal.
   fs.mkdirSync(out, { recursive: true });
@@ -382,9 +439,10 @@ function build() {
 
   const read = (p) => fs.readFileSync(path.join(here, p), "utf8");
   const pages = [
-    { slug: "index", html: homePage(read) },
+    { slug: "index", sources: ["pages/home.html", "content/hero"], html: homePage(read) },
     {
       slug: "formats",
+      sources: ["pages/formats.html"],
       html: layout({
         slug: "formats",
         title: "Formats · CULL",
@@ -392,11 +450,34 @@ function build() {
         body: read("pages/formats.html"),
       }),
     },
-    { slug: "pro", html: proPage(read) },
-    { slug: "thanks", html: thanksPage(read) },
-    { slug: "key", html: keyPage(read) },
+    {
+      slug: "cull-photos",
+      sources: ["pages/cull-photos.html"],
+      html: layout({
+        slug: "cull-photos",
+        title: "How to cull photos before Lightroom · CULL",
+        description:
+          "The method for culling a shoot: keep in rather than reject out, one pass at speed, zoom only to break a tie, and verdicts written where Lightroom reads them. Then the keys that run it in CULL.",
+        body: read("pages/cull-photos.html"),
+      }),
+    },
+    {
+      slug: "cull-vs-lightroom",
+      sources: ["pages/cull-vs-lightroom.html"],
+      html: layout({
+        slug: "cull-vs-lightroom",
+        title: "Culling in Lightroom vs CULL · CULL",
+        description:
+          "Culling inside Lightroom compared with culling before import: previews, keys, twins and bursts, the catalog, and how CULL hands its verdicts to Lightroom as pick flags and a label.",
+        body: read("pages/cull-vs-lightroom.html"),
+      }),
+    },
+    { slug: "pro", sources: ["pages/pro.html"], html: proPage(read) },
+    { slug: "thanks", sources: ["pages/thanks.html"], html: thanksPage(read) },
+    { slug: "key", sources: ["pages/key.html"], html: keyPage(read) },
     {
       slug: "changelog",
+      sources: ["content/changelog.md"],
       html: textPage({
         slug: "changelog",
         title: "What's new.",
@@ -408,6 +489,7 @@ function build() {
     },
     {
       slug: "support",
+      sources: ["pages/support.html"],
       html: layout({
         slug: "support",
         title: "Support · CULL",
@@ -420,6 +502,7 @@ function build() {
     },
     {
       slug: "install",
+      sources: ["pages/install.html"],
       html: layout({
         slug: "install",
         title: "Install CULL",
@@ -433,6 +516,7 @@ function build() {
     },
     {
       slug: "privacy",
+      sources: ["content/privacy.md"],
       html: textPage({
         slug: "privacy",
         title: "Privacy.",
@@ -443,6 +527,7 @@ function build() {
     },
     {
       slug: "terms",
+      sources: ["content/terms.md"],
       html: textPage({
         slug: "terms",
         title: "License terms.",
@@ -453,6 +538,7 @@ function build() {
     },
     {
       slug: "terms-of-sale",
+      sources: ["content/terms-of-sale.md"],
       html: textPage({
         slug: "terms-of-sale",
         title: "Terms of sale.",
@@ -463,6 +549,7 @@ function build() {
     },
     {
       slug: "press",
+      sources: ["pages/press.html", "assets/press"],
       html: layout({
         slug: "press",
         title: "Press kit · CULL",
@@ -477,7 +564,7 @@ function build() {
   const listed = pages.filter((p) => p.slug !== "thanks");
   fs.writeFileSync(
     path.join(out, "sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${listed.map((p) => `  <url><loc>${pageUrl(p.slug)}</loc></url>`).join("\n")}\n</urlset>\n`,
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${listed.map((p) => `  <url><loc>${pageUrl(p.slug)}</loc><lastmod>${lastmod(p.sources)}</lastmod></url>`).join("\n")}\n</urlset>\n`,
   );
   fs.writeFileSync(path.join(out, "robots.txt"), `User-agent: *\nDisallow: /thanks.html\n\nSitemap: ${config.url}sitemap.xml\n`);
   fs.writeFileSync(path.join(out, ".nojekyll"), "");

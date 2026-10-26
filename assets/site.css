@@ -174,6 +174,13 @@ figure.frame figcaption { display: flex; justify-content: space-between; margin-
 @keyframes caret { 50% { opacity: 0 } }
 .formats { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink); }
 .formats span b { color: var(--ink-3); font-weight: 400; margin-left: 8px; }
+/* Questions: two columns of short answers, each question set in the display face. */
+.qa { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 34px 48px; margin: 0; max-width: 1040px; }
+.qa div { min-width: 0; }
+.qa dt { font-family: var(--display); font-weight: 300; font-variation-settings: "opsz" 60; font-size: 23px; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink); margin: 0 0 8px; text-wrap: balance; }
+.qa dd { margin: 0; max-width: 46ch; color: var(--ink-2); font-size: 15px; line-height: 1.6; }
+.qa a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); transition: text-decoration-color 160ms ease; }
+.qa a:hover { text-decoration-color: var(--accent); }
 /* the close: the price as one sentence in the page's own voice */
 .close { padding-top: 128px; padding-bottom: 64px; }
 /* the final call: a panel lit from its corner, the shoot's own grid as a faint texture across it */
@@ -197,6 +204,7 @@ figure.frame figcaption { display: flex; justify-content: space-between; margin-
 .foot nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .foot nav a:hover { color: var(--ink); }
 @media (max-width: 900px) { .split { grid-template-columns: 1fr; } .code pre { min-height: 0; } }
+@media (max-width: 760px) { .qa { grid-template-columns: 1fr; gap: 0; } .qa dt { font-size: 20px; margin-bottom: 6px; } .qa dd { margin-bottom: 26px; } .qa dd:last-child { margin-bottom: 0; } }
 @media (max-width: 760px) { .finale { padding: 34px 22px; border-radius: 14px; } .finale::after { background-size: 1100px auto; opacity: 0.06; } .plans b { font-size: 20px; } .plans span { padding: 8px 14px 8px 12px; } .sect { padding-top: 80px; } .sect + .sect { padding-top: 72px; } figure.app .shot, .panel.code { margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter-r)); border-radius: 0; border-left: 0; border-right: 0; } .code { padding: 18px var(--gutter); } .code pre { font-size: 11px; } .keys { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; } .code { font-size: 11px; } .close { padding-top: 88px; } }
 @media (prefers-reduced-motion: no-preference) { .js .rv { opacity: 0; transform: translateY(18px); transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1); } .js .rv.in { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {

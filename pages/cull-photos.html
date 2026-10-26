@@ -1,0 +1,46 @@
+<div class="head2"><p class="two">How to cull photos before Lightroom. <span class="g">One pass, one key per frame, and only the keeps go into the catalog.</span></p></div>
+<p class="lead">Culling is the first look at a shoot: every frame gets a verdict, keep or reject, before anything is edited. Done before import, it is the fastest hour of the whole job. Done inside the editor, it is usually the slowest. This page is the method, and then the keys that run it in CULL.</p>
+
+<section class="sub">
+<h2>Cull before you import</h2>
+<p>Lightroom was made to edit and organize, and it does both well. It is slow at the first pass for one reason: it has to build its own previews before a frame is sharp on screen, and on a five-thousand-frame folder that is a long wait. The camera already wrote a full-size JPEG inside every RAW file. A culling app reads that one, so the folder is on screen in seconds and the first frame is sharp the moment you reach it.</p>
+<p>The second reason is the catalog. Every frame you import is a row in it, with previews on disk, for as long as you keep it. Importing five thousand frames and keeping four hundred means the catalog carries the other 4,600 until you clean up. Cull first, and only the keeps ever go in.</p>
+</section>
+
+<section class="sub">
+<h2>Keep in, don't reject out</h2>
+<p>There are two ways to run the pass. Rejecting out means looking for what is wrong with each frame. Keeping in means looking for what is right. Keeping in is faster and the result is better, because "would I show this?" has a quick answer and "is anything wrong here?" does not. Default to reject, and promote the frames that earn it.</p>
+<p>Three verdicts are enough: reject, keep, and favorite for the few you would print. More levels than that slow the hand and get re-sorted later anyway. Stars belong in the editor, where you compare edits rather than frames.</p>
+</section>
+
+<section class="sub">
+<h2>One pass, at speed</h2>
+<ul>
+<li><strong>Decide at first sight.</strong> The first impression of a frame is usually the one you end up with. If you cannot decide in a second, keep it for now; the second look will settle it.</li>
+<li><strong>Judge the scene, not the frame.</strong> Most shoots are a few hundred scenes shot several times each. See a scene's frames together, pick the one or two to keep, and reject the rest as a group.</li>
+<li><strong>Zoom only to break a tie.</strong> Sharpness matters between two frames of the same moment and almost never otherwise. Look at 100 % when two keeps are twins, at the point the camera focused, and not before.</li>
+<li><strong>Do not edit.</strong> No crop, no exposure, no straightening while culling. Every adjustment is a change of task, and a frame that needs a fix to be a keep is usually a reject.</li>
+<li><strong>Finish the folder.</strong> A cull left half done is a cull done twice. A day's shoot of a few thousand frames is an evening's work at one key per frame.</li>
+</ul>
+</section>
+
+<section class="sub">
+<h2>Where the verdicts go</h2>
+<p>A verdict is worth keeping only if the editor sees it. Lightroom reads three things from a RAW file's XMP sidecar on import: the pick flag, the reject flag and the color label. So a keep should be written as a pick, a reject as a reject, and a favorite as a pick with a label. Import the folder with Add, so the files stay where they are, and the flags are in the catalog before the first preview is built. Filter on Flagged, and the editing starts on the keeps alone.</p>
+<p>The image data must never change. A culling tool that rewrites the RAW file, or writes its verdicts somewhere only it can read, has made the shoot depend on it. A sidecar beside the file is readable by every editor, and by you in ten years.</p>
+</section>
+
+<section class="sub">
+<h2>The same pass in CULL</h2>
+<p>CULL is this method as an app. Open the folder, and the frames are on screen from the previews the camera wrote. Enter keeps a frame, Backspace rejects it, F marks a favorite, the arrows move. Frames of one scene are grouped before you reach them, and a burst is boxed as one. Hold Space and the frame is at 100 %, at the point the camera focused; let go and you are back. Every verdict is written to the sidecar as you go, as Lightroom's pick, reject and purple label, and the file itself is never touched.</p>
+<div class="keys" aria-label="The keys"><span class="k"><span class="kbd">Enter</span>Keep</span><span class="k"><span class="kbd">Backspace</span>Reject</span><span class="k"><span class="kbd acc">F</span>Favorite</span><span class="k"><span class="kbd">←</span><span class="kbd">→</span>Move</span><span class="k"><span class="kbd">Space</span>Hold for 100 %</span></div>
+</section>
+
+<figure class="app guide-shot">
+  <div class="shot"><img src="./assets/press/loupe.jpg" width="2884" height="1724" alt="The CULL window in Loupe: the Golden Gate from the Marin Headlands, just marked favorite; the rail with the camera's data; the strip with the set's verdicts." loading="lazy"></div>
+  <figcaption><span><b>Loupe</b> · the Golden Gate · 16 May 2026</span><span>Frame 3,988 of 5,259 · 371 keeps so far</span></figcaption>
+</figure>
+
+<section class="sub">
+<p>Free culls up to 250 frames in one session, with every feature, on Windows and Mac. <a href="./install.html">Download CULL</a>, or read <a href="./cull-vs-lightroom.html">how it compares with culling inside Lightroom</a>.</p>
+</section>

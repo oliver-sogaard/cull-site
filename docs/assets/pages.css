@@ -50,6 +50,23 @@ html[data-os="phone"] .downloads { opacity: 0.4; pointer-events: none; }
 .plate figcaption strong { color: var(--ink); font-weight: 500; }
 
 /* formats */
+/* The comparison: one line per point, Lightroom in the middle, CULL at the right. On phones each row is a short card. */
+.vs { width: 100%; border-collapse: collapse; margin: 22px 0 0; }
+.vs th, .vs td { text-align: left; vertical-align: top; padding: 14px 22px 14px 0; border-top: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--ink-2); }
+.vs th { border-top: 0; padding-top: 0; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+.vs td:first-child { width: 24%; color: var(--ink); font-weight: 500; padding-right: 28px; }
+.vs td:last-child { color: var(--ink); padding-right: 0; }
+.vs td a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-4); }
+.vs td a:hover { text-decoration-color: var(--accent); }
+.guide-shot { margin: 56px 0 0; max-width: 52rem; }
+@media (max-width: 700px) {
+  .vs thead { display: none; }
+  .vs, .vs tbody, .vs tr, .vs td { display: block; width: auto; }
+  .vs tr { padding: 16px 0 6px; border-top: 1px solid var(--line); }
+  .vs td { border-top: 0; padding: 0 0 10px; }
+  .vs td:first-child { width: auto; padding-bottom: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+  .vs td[data-l]::before { content: attr(data-l); display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 2px; }
+}
 .formats-list { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 12px 28px; margin: 0; }
 .formats-list dt { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--ink); padding-top: 3px; }
 .formats-list dd { margin: 0; color: var(--ink-2); font-size: 16px; line-height: 1.55; }

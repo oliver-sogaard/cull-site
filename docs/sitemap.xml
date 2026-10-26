@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cull.photography/</loc></url>
-  <url><loc>https://cull.photography/formats.html</loc></url>
-  <url><loc>https://cull.photography/pro.html</loc></url>
-  <url><loc>https://cull.photography/key.html</loc></url>
-  <url><loc>https://cull.photography/changelog.html</loc></url>
-  <url><loc>https://cull.photography/support.html</loc></url>
-  <url><loc>https://cull.photography/install.html</loc></url>
-  <url><loc>https://cull.photography/privacy.html</loc></url>
-  <url><loc>https://cull.photography/terms.html</loc></url>
-  <url><loc>https://cull.photography/terms-of-sale.html</loc></url>
-  <url><loc>https://cull.photography/press.html</loc></url>
+  <url><loc>https://cull.photography/</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://cull.photography/formats.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/cull-photos.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://cull.photography/cull-vs-lightroom.html</loc><lastmod>2026-10-26</lastmod></url>
+  <url><loc>https://cull.photography/pro.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/key.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/changelog.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/support.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/install.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/privacy.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/terms.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/terms-of-sale.html</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://cull.photography/press.html</loc><lastmod>2026-10-20</lastmod></url>
 </urlset>
