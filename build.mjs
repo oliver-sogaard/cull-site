@@ -29,6 +29,8 @@ export const config = {
   released: true,
   downloads: "https://github.com/oliver-sogaard/cull-releases/releases/latest",
   supportEmail: "support@cull.photography",
+  /** IndexNow: the build serves this key at /<key>.txt, and a ping with it tells Bing and the others which pages changed. Public by design. */
+  indexNowKey: "abd8c99f96e84d24ffa6267cef04f3ae",
   reportUrl: "",
   owner: "Oliver Søgaard-Andersen",
   year: "2026",
@@ -569,6 +571,7 @@ function build() {
   );
   fs.writeFileSync(path.join(out, "robots.txt"), `User-agent: *\nDisallow: /thanks\nDisallow: /thanks.html\n\nSitemap: ${config.url}sitemap.xml\n`);
   fs.writeFileSync(path.join(out, ".nojekyll"), "");
+  fs.writeFileSync(path.join(out, `${config.indexNowKey}.txt`), config.indexNowKey);
   console.log(`built ${pages.length} pages → ${out}`);
 }
 
