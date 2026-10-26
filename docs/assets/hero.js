@@ -149,12 +149,38 @@
       photo.style.transform = `translate(${x}px, ${y}px)`; photo.style.opacity = grow > 0 ? 1 : 0;
     }
   }
-  // the scroll position is the target; what is drawn follows it with a 90 ms time constant, so a wheel's steps become motion
+  // the scroll position is the target; what is drawn follows it with a 90 ms time constant, so a wheel's steps become motion,
+  // and never faster than MAXV of the hero per second: a fling or a long wheel still plays the cull through, in order
+  const MAXV = touch ? 0.5 : 0.6;
   let target = 0, animating = false, lastT = 0;
   function onScroll() { const r = section.getBoundingClientRect(); target = Math.min(1, Math.max(0, -r.top / (r.height - stage.offsetHeight))); if (target > 0.005) scrolled = true; if (!animating) { animating = true; lastT = performance.now(); requestAnimationFrame(tick); } }
-  function tick(now) { const dt = Math.min(64, now - lastT); lastT = now; const d = target - lastP; if (Math.abs(d) < 0.0003) { render(target); animating = false; return; } render(lastP + d * (1 - Math.exp(-dt / (touch ? 140 : 90)))); requestAnimationFrame(tick); }
+  function tick(now) {
+    const dt = Math.min(64, now - lastT); lastT = now;
+    const d = target - lastP;
+    if (Math.abs(d) < 0.0003) { render(target); animating = false; return; }
+    const cap = MAXV * dt / 1000, step = d * (1 - Math.exp(-dt / (touch ? 140 : 90)));
+    render(lastP + Math.max(-cap, Math.min(cap, step)));
+    requestAnimationFrame(tick);
+  }
   let lastW = innerWidth, lastH = innerHeight, rt = 0;
   addEventListener('resize', () => { if (innerWidth === lastW && (touch || Math.abs(innerHeight - lastH) < 80)) return; lastW = innerWidth; lastH = innerHeight; clearTimeout(rt); rt = setTimeout(build, 120); });
+  // the curtain over the stage: the grid is one sprite sheet, and on a cold start or a slow line it arrives late. The stage
+  // stays covered (the name and a line filling) until the sheet and the type are in, then the curtain lifts. Never longer than 9 s.
+  const curtain = document.getElementById('curtain');
+  const ready = () => { if (!curtain || curtain.classList.contains('up')) return; curtain.classList.add('full'); setTimeout(() => { curtain.classList.add('up'); setTimeout(() => curtain.remove(), 700); }, 220); };
+  const sheetUrl = () => {
+    const bg = getComputedStyle(sheet).getPropertyValue('--sheet').trim();
+    const a = bg.indexOf('('), b = bg.lastIndexOf(')');
+    if (a < 0 || b < a) return null;
+    const css = document.querySelector('link[rel="stylesheet"][href*="site.css"]');
+    return new URL(bg.slice(a + 1, b).trim().replace(/^["']|["']$/g, ''), css ? css.href : location.href).href;
+  };
+  const waits = [document.fonts ? document.fonts.ready : Promise.resolve()];
+  const url = sheetUrl();
+  if (url) waits.push(new Promise((res) => { const im = new Image(); im.onload = res; im.onerror = res; im.src = url; }));
+  Promise.all(waits).then(ready);
+  setTimeout(ready, 9000);
+
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) { section.style.height = '100vh'; invite.classList.add('off'); scrolled = true; build(); render(1); }
   else {
     addEventListener('scroll', onScroll, { passive: true });

@@ -202,3 +202,13 @@ figure.frame figcaption { display: flex; justify-content: space-between; margin-
   .cell, .cell .dot, .photo::after, .claim, .invite, .rail, .burst, .code .ln { transition: none; }
   .invite .k .wheel::after, .cell.cur.wait .frame, .code .caret { animation: none; }
 }
+
+/* The curtain over the stage while the sheet and the type arrive: the name, and a line that fills. */
+.curtain { position: absolute; inset: 0; z-index: 9; background: var(--bg); display: grid; place-content: center; justify-items: center; gap: 22px; transition: opacity 620ms ease; }
+.curtain.up { opacity: 0; pointer-events: none; }
+.curtain .brand { font-family: var(--mono); font-weight: 500; font-size: 13px; letter-spacing: 0.42em; padding-left: 0.42em; color: var(--accent); }
+.curtain .line { width: 180px; height: 1px; background: var(--edge); overflow: hidden; }
+.curtain .line span { display: block; height: 100%; width: 0; background: var(--accent); animation: fill 2.2s cubic-bezier(.2,.7,.2,1) forwards; transition: width 220ms ease; }
+.curtain.full .line span { animation: none; width: 100%; }
+@keyframes fill { from { width: 0; } to { width: 84%; } }
+@media (prefers-reduced-motion: reduce) { .curtain .line span { animation: none; width: 84%; } .curtain { transition: none; } }

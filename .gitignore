@@ -3,3 +3,5 @@ node_modules/
 Thumbs.db
 node_modules/
 mockup/
+out-test/
+.playwright-mcp/
